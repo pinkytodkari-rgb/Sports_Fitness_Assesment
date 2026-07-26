@@ -1,0 +1,47 @@
+[
+  {
+    "rank": 1,
+    "athleteId": "ath-1",
+    "name": "Marcus Vance",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80",
+    "sport": "Basketball",
+    "score": 96,
+    "change": "up"
+  },
+  {
+    "rank": 2,
+    "athleteId": "ath-2",
+    "name": "Elena Rostova",
+    "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80",
+    "sport": "Track & Field",
+    "score": 94,
+    "change": "same"
+  },
+  {
+    "rank": 3,
+    "athleteId": "ath-4",
+    "name": "Jordan Carter",
+    "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80",
+    "sport": "Football",
+    "score": 93,
+    "change": "up"
+  },
+  {
+    "rank": 4,
+    "athleteId": "ath-3",
+    "name": "Tariq Al-Mansoor",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80",
+    "sport": "Soccer",
+    "score": 91,
+    "change": "down"
+  },
+  {
+    "rank": 5,
+    "athleteId": "ath-5",
+    "name": "Sophia Tanaka",
+    "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80",
+    "sport": "Volleyball",
+    "score": 89,
+    "change": "up"
+  }
+]

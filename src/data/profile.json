@@ -1,0 +1,16 @@
+{
+  "id": "ath-1",
+  "name": "Marcus Vance",
+  "email": "marcus.vance@athlete.ai",
+  "role": "athlete",
+  "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80",
+  "sport": "Basketball",
+  "position": "Point Guard",
+  "team": "West Coast Elite",
+  "bio": "Dedicated point guard specializing in high-tempo transition plays, vision biomechanics, and explosive vertical drive.",
+  "age": 19,
+  "height": "6'2\"",
+  "weight": "185 lbs",
+  "verticalLeap": "38.5 in",
+  "sprintTime": "4.28 s"
+}

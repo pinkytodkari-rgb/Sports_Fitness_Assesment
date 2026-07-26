@@ -1,0 +1,32 @@
+[
+  {
+    "id": "rep-101",
+    "athleteId": "ath-1",
+    "athleteName": "Marcus Vance",
+    "sport": "Basketball",
+    "overallScore": 96,
+    "generatedDate": "July 24, 2026",
+    "summary": "Verified Elite Tier Prospect. Exceptional lateral explosion and squat kinetic power.",
+    "status": "Ready"
+  },
+  {
+    "id": "rep-102",
+    "athleteId": "ath-2",
+    "athleteName": "Elena Rostova",
+    "sport": "Track & Field",
+    "overallScore": 94,
+    "generatedDate": "July 22, 2026",
+    "summary": "Sub-11s 100m trajectory. Top 0.5% sprint mechanics biomechanics rating.",
+    "status": "Ready"
+  },
+  {
+    "id": "rep-103",
+    "athleteId": "ath-3",
+    "athleteName": "Tariq Al-Mansoor",
+    "sport": "Soccer",
+    "overallScore": 91,
+    "generatedDate": "July 20, 2026",
+    "summary": "High endurance agility rating. Recommended for NCAA Division I trial.",
+    "status": "Ready"
+  }
+]

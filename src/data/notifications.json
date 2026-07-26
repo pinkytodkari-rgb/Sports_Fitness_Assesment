@@ -1,0 +1,34 @@
+[
+  {
+    "id": "notif-1",
+    "title": "AI Assessment Verified",
+    "message": "Your Vertical Jump assessment scored 96/100! New personal record achieved.",
+    "time": "10 mins ago",
+    "type": "assessment",
+    "read": false
+  },
+  {
+    "id": "notif-2",
+    "title": "Scout Shortlisted You",
+    "message": "Coach Miller from Pacific State Athletics shortlisted your profile.",
+    "time": "2 hours ago",
+    "type": "scout",
+    "read": false
+  },
+  {
+    "id": "notif-3",
+    "title": "Badge Unlocked",
+    "message": "You unlocked the 'Speed Demon' tier 3 achievement badge!",
+    "time": "Yesterday",
+    "type": "achievement",
+    "read": true
+  },
+  {
+    "id": "notif-4",
+    "title": "Monthly Scout Report Ready",
+    "message": "Your July biomechanics and recruitment report is ready for export.",
+    "time": "2 days ago",
+    "type": "system",
+    "read": true
+  }
+]

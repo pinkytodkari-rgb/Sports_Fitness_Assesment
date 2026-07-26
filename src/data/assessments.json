@@ -1,0 +1,57 @@
+[
+  {
+    "id": "drill-1",
+    "title": "Vertical Jump Mechanics",
+    "category": "Explosive Power",
+    "duration": "60 secs",
+    "difficulty": "Elite",
+    "description": "Measures hip drive, knee extension velocity, and vertical displacement using vision-based pose tracking.",
+    "targetMetric": "38.5 Inches",
+    "iconName": "flash-outline",
+    "bannerColor": ["#00F2FE", "#4FACFE"]
+  },
+  {
+    "id": "drill-2",
+    "title": "Pro Agility 5-10-5 Shuttle",
+    "category": "Lateral Quickness",
+    "duration": "45 secs",
+    "difficulty": "Pro",
+    "description": "Evaluates change-of-direction speed, center of gravity elevation, and plant foot posture angle.",
+    "targetMetric": "4.12 Seconds",
+    "iconName": "swap-horizontal-outline",
+    "bannerColor": ["#7F00FF", "#E100FF"]
+  },
+  {
+    "id": "drill-3",
+    "title": "Deep Squat Kinetic Posture",
+    "category": "Biomechanical Form",
+    "duration": "90 secs",
+    "difficulty": "Intermediate",
+    "description": "Monitors knee valgus alignment, hip depth, spine symmetry, and ground contact force distribution.",
+    "targetMetric": "98% Symmetry",
+    "iconName": "fitness-outline",
+    "bannerColor": ["#10B981", "#059669"]
+  },
+  {
+    "id": "drill-4",
+    "title": "40-Yard Sprint Acceleration",
+    "category": "Pure Speed",
+    "duration": "30 secs",
+    "difficulty": "Elite",
+    "description": "Measures stride rate frequency, arm swing angle, and maximum velocity curve over 40 yards.",
+    "targetMetric": "4.35 Seconds",
+    "iconName": "speedometer-outline",
+    "bannerColor": ["#F59E0B", "#D97706"]
+  },
+  {
+    "id": "drill-5",
+    "title": "Reaction Time & Spatial Awareness",
+    "category": "Cognitive Athleticism",
+    "duration": "60 secs",
+    "difficulty": "Pro",
+    "description": "Real-time dynamic visual stimulus response testing agility reaction and limb coordination.",
+    "targetMetric": "210 ms",
+    "iconName": "pulse-outline",
+    "bannerColor": ["#EC4899", "#8B5CF6"]
+  }
+]
