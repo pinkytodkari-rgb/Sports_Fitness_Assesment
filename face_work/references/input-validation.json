@@ -1,0 +1,72 @@
+{
+  "truncated_input": {
+    "passed": true,
+    "error": "Video decoding ended early. Upload a complete, uncorrupted video."
+  },
+  "short_input": {
+    "passed": true,
+    "error": "RepNet needs at least 64 sampled frames; use a longer clip."
+  },
+  "default_upload": {
+    "recognition": {
+      "exercise": "Push-ups",
+      "models": [
+        {
+          "exercise": "Push-ups",
+          "predicted_activity": "push up",
+          "model_score": 0.999,
+          "top_predictions": [
+            {
+              "label": "push up",
+              "score": 0.999
+            },
+            {
+              "label": "exercising arm",
+              "score": 0.0004
+            },
+            {
+              "label": "yoga",
+              "score": 0.0003
+            },
+            {
+              "label": "situp",
+              "score": 0.0001
+            },
+            {
+              "label": "pull ups",
+              "score": 0.0001
+            }
+          ],
+          "reason": "Supported exercise detected",
+          "model": "torchvision/S3D_KINETICS400_V1",
+          "method": "pretrained S3D classifier"
+        }
+      ],
+      "reason": "Supported exercise detected",
+      "processing_seconds": 8.823,
+      "clips_analyzed": 1
+    },
+    "counting": {
+      "estimated_reps": 2.74456524848938,
+      "periodicity_score": 0.7214198112487793,
+      "stride": 2,
+      "method": "pretrained RepNet",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "form_assessment": "Unavailable: RepNet does not assess form",
+      "processing_seconds": 28.541,
+      "video_seconds": 11.64
+    },
+    "form_assessment": "Unavailable: no validated form-assessment checkpoint for these exercises",
+    "valid_reps": null,
+    "invalid_reps": null,
+    "pose_visible_percent": null,
+    "processing_seconds": 57.164,
+    "video_seconds": 11.64,
+    "input": "uploaded video",
+    "models": [
+      "torchvision/S3D_KINETICS400_V1",
+      "RepNet"
+    ]
+  }
+}

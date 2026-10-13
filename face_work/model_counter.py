@@ -11,6 +11,7 @@ import time
 import cv2
 import numpy as np
 import torch
+from runtime import INFERENCE_LOCK
 
 ROOT = Path(__file__).resolve().parent
 
@@ -27,10 +28,9 @@ def load_counter():
     model.load_state_dict(torch.load(weights, map_location='cpu', weights_only=True))
     return model.eval().to(device), device
 
-def count_video(path, status=None):
+def count_video(path, status=None, strides=(1,2)):
     started = time.perf_counter()
-    if status: status('Loading pretrained RepNet…')
-    model, device = load_counter()
+    if status: status('Decoding video for RepNet…')
     cap = cv2.VideoCapture(str(path))
     fps = cap.get(cv2.CAP_PROP_FPS)
     expected_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -57,9 +57,12 @@ def count_video(path, status=None):
         raise ValueError('Video decoding ended early. Upload a complete, uncorrupted video.')
     if len(frames) < 64:
         raise ValueError('RepNet needs at least 64 sampled frames; use a longer clip.')
+    if status: status('Loading pretrained RepNet…')
+    with INFERENCE_LOCK:
+        model, device = load_counter()
     best = None
-    with torch.inference_mode():
-        for stride in (1,2,3,4):
+    with INFERENCE_LOCK, torch.inference_mode():
+        for stride in strides:
             inputs = frames[::stride]
             if len(inputs) < 64: continue
             lengths, periodicities = [], []
@@ -87,6 +90,20 @@ def count_video(path, status=None):
     best['processing_seconds'] = round(time.perf_counter()-started,3)
     best['video_seconds'] = round(index/fps,3)
     return best
+
+def count_window(rgb_frames):
+    """One 64-frame temporal window; no overlapping-window double counting."""
+    if len(rgb_frames) != 64: raise ValueError('A live counting window needs 64 frames.')
+    started = time.perf_counter()
+    with INFERENCE_LOCK, torch.inference_mode():
+        model,device = load_counter()
+        tensors = [torch.from_numpy(cv2.resize(f,(112,112)).copy()).permute(2,0,1).float()/127.5-1
+                   for f in rgb_frames]
+        inputs = torch.stack(tensors).transpose(0,1).unsqueeze(0).to(device)
+        length,periodicity,_ = model(inputs)
+        confidence,_,cumulative,_ = model.get_counts(length[0].cpu(),periodicity[0].cpu(),1)
+    return {'estimated_reps':float(cumulative[-1]),'periodicity_score':float(confidence),
+            'processing_seconds':round(time.perf_counter()-started,3),'method':'pretrained RepNet'}
 
 if __name__ == '__main__':
     import json

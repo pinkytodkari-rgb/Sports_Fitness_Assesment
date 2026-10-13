@@ -1,58 +1,35 @@
-# Model-based implementation and validation
+# Implementation status — 2026-10-13
 
-## Stage 1 — repetition model experiment (2026-10-13)
+| Component | Implementation | Validation |
+|---|---|---|
+| Rule removal | `fitness.py`, legacy state machine and rule tests removed | Active modules have no fitness import; checks passed |
+| Preserved context | `context.md` stores exact thresholds, state-machine behavior, previous Git commit | Reference only; not imported/executed |
+| Recognition | S3D K400, TimeSformer K600, VideoMAE K400, agreement option | All three recognized public push-ups and existing squat clip |
+| Counting | Pretrained RepNet, upload multiscale and single-window live inference | Actual inference tested; exact counting accuracy failed |
+| Pose preview | MediaPipe Pose Lite, full image, no status text over athlete | Uploaded previews and camera callback tested |
+| Video feed | Uploaded video and annotated preview | Actual model integration on two clips |
+| Camera feed | Browser WebRTC SENDRECV, video only | Real-server component rendering and real callback/replay passed; physical camera unverified |
+| Background inference | Bounded queue, disjoint windows, skipped coverage/error display | Scheduler tests passed |
+| Form assessment | Explicitly unavailable | No verified model coverage; no fallback |
 
-Implemented `model_counter.py` and a separate `model_stage.py` UI. This path uses
-TimeSformer for exercise recognition and pretrained RepNet for repetition estimation.
-It does not call `fitness.Counter`, angle thresholds, or canned form feedback.
-The original app remains the previous prototype; the new model-only app is on port 8502.
+The original rule code can be recovered from Git commit `1b67d32`. This is not an
+active fallback. Stage 1 historical results remain in `references/stage1-results.json`.
+Current results are in `references/model-validation.json` and
+`references/server-validation.json`.
 
-Run with `.venv\Scripts\python.exe -m streamlit run model_stage.py --server.port 8502`.
+## Acceptance gaps
 
-Upstream RepNet implementation: https://github.com/materight/RepNet-pytorch
-Revision: c455c53a7e48724f73a2e65e336aee065c965418
-Weights: https://huggingface.co/materight/repnet
-Local change: use pinned installed timm instead of downloading executable torch.hub code.
-Retain upstream attribution; upstream licensing needs verification before redistribution.
-
-### Validation
-
-- Streamlit AppTest startup: passed.
-- HTTP health endpoint on port 8502: passed.
-- Pretrained checkpoint loading and actual inference: passed.
-- Truncated original push-up file: rejected; complete replacement downloaded.
-- Public push-up source: https://videos.pexels.com/video-files/4804794/4804794-hd_1920_1080_25fps.mp4
-- Push-ups: visually reviewed timestamped frames show 3 complete cycles. TimeSformer
-  identified Push-ups; RepNet estimated 2.7446 (absolute error about 0.2554).
-  Counting took 33.189 seconds for 11.64 seconds of footage.
-- Existing squat sample: TimeSformer identified Squats; RepNet estimated 1.2149.
-  Counting took 69.996 seconds for 20.487 seconds of footage. Ground-truth count
-  was not independently established in this stage; the previous rule-counter result
-  must not be used as ground truth.
-- Results are in `references/stage1-results.json`. These timings include counter
-  loading and count inference, but not the subsequent TimeSformer recognition.
-
-**Acceptance: failed for live speed.** The model is integrated as an experiment,
-not a production replacement. Count accuracy is unproven across exercises. Fractional
-estimates are displayed without claiming that they measure complete or valid reps.
-RepNet has learned outputs plus its published confidence/postprocessing thresholds;
-it does not use hand-authored exercise-angle rules. No form fallback is active.
-
-## Next stages, in order
-
-1. Resolve counting speed and accuracy: profile GPU availability and the encoder,
-   evaluate streaming frame windows and alternative pretrained counting models.
-   Recheck push-ups, squats, jumping jacks and sit-ups against manually labelled clips,
-   including pauses and non-exercise footage. Do not promote a failed model.
-2. Implement browser camera streaming and asynchronous inference. Replay internet
-   footage through the same stream path; measure processing lag, queue growth,
-   frame loss, and duplicate counts. Then verify with an actual webcam.
-3. Add rolling exercise recognition and verify transitions and uncertain predictions.
-4. Evaluate form-assessment checkpoints against labelled correct/incorrect examples
-   for each supported exercise. Missing coverage must remain unavailable. Request
-   explicit approval before enabling a clearly labelled rule-based fallback.
-5. Combine the accepted components, remove the legacy rule assessment from the
-   active app, and run end-to-end regression and friend-laptop setup checks.
-
-Each stage records source clips, manual labels, model outputs, failures, timings and
-remaining work. A successful startup is not an accuracy or real-time acceptance test.
+1. Counting quality is not accepted: public push-up video has 3 visually reviewed
+   cycles, estimate 2.7446; squat video has 2 visually reviewed cycles and default
+   estimate about 1.0186. Do not round estimates and call them validated counts.
+2. CPU upload analysis remains slower than playback. Live streaming shows delayed
+   window results; its full-coverage timing acceptance has not been established.
+   Lighter S3D + RepNet live replay took 7.305s for an 8.005s window, compared
+   with 13.204s using TimeSformer. S3D is now the default; predictions still lag.
+3. Real webcam start/permission/stop and negotiated browser connection need a
+   physical-browser test. Automation helpers timed out; never describe replay as
+   proof that a physical webcam was tested.
+4. Sit-ups, jumping jacks, lunges, mixed movement, pauses and more subjects need
+   labelled integration clips. Published model benchmarks are not app accuracy.
+5. Form-error feedback needs appropriate trained checkpoints or new labelled
+   training data. Restore rules only on explicit user instruction.

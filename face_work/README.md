@@ -1,62 +1,78 @@
-# Athlete Fitness Assessment
+# Athlete Fitness Assessment — pretrained models
 
-Local video assessment with pretrained TimeSformer Kinetics-600 for automatic exercise recognition, MediaPipe Pose Landmarker Full for pose, and temporal state machines for counting. No custom training is required. Model files are cached locally in `models/`.
+The active app has two inputs: **Video feed (upload)** and **Live camera**.
+Both use trained video classifiers (S3D, TimeSformer or VideoMAE) and RepNet. MediaPipe Pose Lite supplies preview
+landmarks. The legacy joint-angle counter and canned posture advice were removed;
+their thresholds and recovery reference are preserved in [context.md](context.md).
 
-## Start on Windows
+## Run on Windows
 
-Python 3.12 is recommended. Open PowerShell in this folder:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\start.ps1
-```
-
-Open http://localhost:8501. Upload one exercise per video and click Analyze video. Auto detection is the default. It samples up to three clips, averages the trained classifier's predictions, then analyzes repetitions from the start of the video. Manual selection remains an optional override.
-
-## Supported exercises
-
-| Exercise | View | Completed-cycle measurement | Additional visible check |
-|---|---|---|---|
-| Squats | Side | Knee flexion then return to standing | Torso inclination |
-| Push-ups | Side | Elbow flexion then extension | Shoulder–hip–ankle alignment |
-| Sit-ups | Side | Hip flexion then return to lying position | Range only |
-| Jumping jacks | Front | Arms up + legs apart, then arms down + legs together | Coordinated endpoints |
-| Lunges | Side | Visible-side knee flexion then return | Torso inclination |
-| Biceps curls | Side | Visible-side elbow flexion then extension | Upper arm displacement |
-
-The more visible side is assessed for unilateral exercises; curls and lunges do not aggregate independent left/right reps. Auto detection uses facebook/timesformer-base-finetuned-k600 and covers squats, push-ups, sit-ups, jumping jacks and lunges. Biceps curls require manual selection because this checkpoint has no matching class. No counting frames are lost to recognition warmup. Mixed-exercise videos are not supported; conflicting supported predictions across sampled clips are rejected, but unsampled transitions may be missed.
-
-The classifier evaluates all 600 classes. A supported top prediction must have score >= 0.35 and a margin >= 0.10 over second place. Otherwise the result is Unknown and counting is skipped. These are uncalibrated prototype thresholds. Top five activities and raw model scores are displayed and exported. Scores are not accuracy estimates. The first automatic run downloads roughly 0.5 GB of weights and CPU recognition can be slow. The checkpoint is listed under CC-BY-NC-4.0; assess licensing before commercial deployment.
-
-## Outputs and limits
-
-Annotated preview, completed/valid/invalid reps, frame coverage, per-rep timestamps and feedback, completion snapshots and downloadable JSON. No video is permanently stored; temporary input files are deleted after analysis. Model weights remain locally cached.
-
-Rules are configurable in fitness.py and are prototype criteria, not clinical or official SAI criteria. Full-range thresholds differ by person, camera and test protocol. A cycle is invalid if it does not reach the configured endpoint or a monitored error appears in at least 25% of its assessable frames. Incomplete final cycles are not counted. Landmark gaps over half a second reset the cycle. Missing landmarks are not classified as bad form. The prototype does not measure every form error; sit-ups only have range checks. No official SAI scores, trained form/error classifier, mobile app, live camera interface, or validated universal exercise recognition is included.
-
-For initial evaluation, manually count 3–5 clips per exercise: normal reps, partial reps, pauses, occlusion and incorrect form. Compare with JSON timestamps. These clips are necessary to tune and validate the rules before relying on scores.
-
-## Sources
-
-## Latency and display updates
-
-Recognition scores remain internal for rejection thresholds and JSON diagnostics, but are hidden from the interface. TimeSformer is cached in memory, uses CUDA when available, and downsizes sampled frames before preprocessing. A supported central-clip prediction >= 0.85 can finish immediately. Two strong agreeing clips can skip the third; uncertain clips retain all three. This optimization assumes one exercise per video and can miss exercise changes elsewhere in a video. On the local squat sample, warm classification took 5.71 seconds using one clip versus 18.35 seconds using three. This is recognition time only; pose processing adds time and first-load latency differs.
-
-Jumping jacks use the pretrained MediaPipe Lite pose bundle; other exercises retain Full for alignment checks. Pose sampling targets 15 FPS for jumping jacks and 10 FPS otherwise, with a 640-pixel preview width and less frequent UI refreshes. These are video sampling rates, not guaranteed wall-clock processing rates. Validate fast movements on your clips.
-
-- https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/python
-- https://huggingface.co/facebook/timesformer-base-finetuned-k600
-- Reference diagram: references/athlete-fitness-assessment-flow.png
-# Model-based Stage 1 experiment
-
-The new experimental screen runs with:
+Use Python 3.12, then run `./start.ps1` in PowerShell, or:
 
 ```powershell
-python -m pip install -r requirements.txt
-python -m streamlit run model_stage.py --server.port 8502
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-It uses pretrained TimeSformer recognition and RepNet repetition estimation.
-Weights download on first use. Form assessment is unavailable; this screen does
-not use the legacy exercise-angle rules. It has **not passed real-time latency
-validation**. See [STAGED_IMPLEMENTATION.md](STAGED_IMPLEMENTATION.md) for measured
-test results and remaining stages. `app.py` below remains the earlier prototype.
+Open the displayed localhost URL. The first model preparation downloads pretrained
+weights; subsequent runs use the local cache. CPU works; a CUDA-compatible PyTorch
+installation and GPU can improve large-model inference. Weights are not in Git.
+`model_stage.py` is a compatibility launcher for the same app.
+
+## Use
+
+- Select S3D (lighter default), TimeSformer, VideoMAE, or **Both (agreement)** in the sidebar. Both compares TimeSformer and VideoMAE, rejects
+  disagreements and costs more computation. TimeSformer supports jumping jacks;
+  the selected S3D and VideoMAE K400 checkpoints have no matching jumping-jacks class.
+- Upload a video containing one person and one exercise. Press Analyze video.
+  Preview text is below the image; the whole image fits a compact panel.
+- For camera input, prepare models, choose Live camera, press START, and allow
+  camera access in your browser. Microphone capture is disabled. STOP ends capture.
+  Prefer Chrome/Edge. Localhost supports camera access; a remote deployment needs
+  HTTPS and may need a TURN server where direct WebRTC connections are blocked.
+- Live recognition/counting runs in a bounded background queue. Video display
+  does not wait for these large models. Results need 64 frames at about 8 sampled
+  FPS plus model inference time. The UI reports result age, skipped coverage and
+  pending frames. Partial final windows are not assessed. Windows are disjoint,
+  but repetition estimates can be inaccurate around window boundaries.
+
+## What the outputs mean
+
+RepNet estimates **periodic motion**, including fractional cycles. It does not
+identify valid/invalid repetitions. Form assessment, posture-error feedback and
+official SAI scoring are unavailable; no rule fallback is enabled.
+
+Normal model preprocessing, confidence rejection, label mapping, queue limits and
+the model author's postprocessing still contain configuration values. These are
+not exercise-angle rules and are not trained form assessment.
+
+Live camera transport is implemented. Accurate instantaneous model results on a
+CPU laptop are **not guaranteed**. See [EVALUATION.md](EVALUATION.md) for actual
+tests and failures. Automatic recognition coverage is checkpoint-dependent;
+curls and arbitrary exercises must not be claimed as supported without tests.
+
+## Verify
+
+```powershell
+.venv\Scripts\python.exe smoke_test.py
+.venv\Scripts\python.exe validate_models.py
+.venv\Scripts\python.exe validate_server.py
+.venv\Scripts\python.exe validate_fast_model.py
+.venv\Scripts\python.exe validate_inputs.py
+```
+
+`validate_models.py` needs test clips in `sample_videos`; its public push-up source
+is recorded in the script. `validate_server.py` expects the app at port 8502.
+For that check launch with `--server.port 8502`. Hardware camera permission and
+actual webcam capture require a separate browser test.
+
+Model sources: [TimeSformer](https://huggingface.co/facebook/timesformer-base-finetuned-k600),
+[VideoMAE](https://huggingface.co/MCG-NJU/videomae-base-finetuned-kinetics),
+[S3D](https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.video.s3d.html),
+[RepNet weights](https://huggingface.co/materight/repnet),
+[RepNet implementation](https://github.com/materight/RepNet-pytorch),
+[MediaPipe Pose](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker/python).
+The vendor model changes its encoder loader to installed timm; attribution and
+original source revision are recorded in context/history. Verify upstream licensing
+before distributing third-party code commercially.

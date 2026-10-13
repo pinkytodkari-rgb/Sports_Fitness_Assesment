@@ -2,6 +2,9 @@
 from functools import lru_cache
 from pathlib import Path
 import os
+from runtime import INFERENCE_LOCK
+
+VIDEOMAE_ID = 'MCG-NJU/videomae-base-finetuned-kinetics'
 
 MODEL_ID = 'facebook/timesformer-base-finetuned-k600'
 MODEL_DIR = Path(__file__).resolve().parent/'models'/'timesformer-kinetics600'
@@ -44,6 +47,59 @@ def load_model():
     torch.set_num_threads(min(4,os.cpu_count() or 1))
     model.to('cuda' if torch.cuda.is_available() else 'cpu')
     return processor,model
+
+@lru_cache(maxsize=1)
+def load_videomae():
+    import torch
+    from transformers import VideoMAEImageProcessor, VideoMAEForVideoClassification
+    cache = Path(__file__).resolve().parent/'models'/'hub-cache'
+    processor = VideoMAEImageProcessor.from_pretrained(VIDEOMAE_ID,cache_dir=str(cache))
+    model = VideoMAEForVideoClassification.from_pretrained(VIDEOMAE_ID,cache_dir=str(cache))
+    return processor, model.eval().to('cuda' if torch.cuda.is_available() else 'cpu')
+
+@lru_cache(maxsize=1)
+def load_s3d():
+    import torch
+    from torchvision.models.video import s3d, S3D_Weights
+    torch.set_num_threads(min(4,os.cpu_count() or 1))
+    weights = S3D_Weights.KINETICS400_V1
+    model = s3d(weights=weights).eval().to('cuda' if torch.cuda.is_available() else 'cpu')
+    return weights.transforms(),model,dict(enumerate(weights.meta['categories']))
+
+def classify_frames(frames, backend='TimeSformer'):
+    """RGB frames from either upload or live camera, using trained classifiers."""
+    import numpy as np
+    import torch
+    if len(frames) < 16: raise ValueError('Recognition requires at least 16 frames.')
+    started = __import__('time').perf_counter()
+    results = []
+    names = ['TimeSformer','VideoMAE'] if backend == 'Both (agreement)' else [backend]
+    with INFERENCE_LOCK, torch.inference_mode():
+        for name in names:
+            if name not in ('TimeSformer','VideoMAE','S3D'): raise ValueError('Unknown recognition model')
+            if name=='S3D':
+                import cv2
+                transform,model,labels = load_s3d()
+                targets = np.linspace(0,len(frames)-1,32,dtype=int)
+                clip = torch.stack([torch.from_numpy(cv2.resize(frames[i],(256,256)).copy()).permute(2,0,1) for i in targets])
+                inputs = transform(clip).unsqueeze(0).to(next(model.parameters()).device)
+                scores = model(inputs).softmax(-1)[0].cpu().tolist()
+                result = decide(scores,labels)
+                result['model'] = 'torchvision/S3D_KINETICS400_V1'
+            else:
+                processor,model = load_model() if name == 'TimeSformer' else load_videomae()
+                targets = np.linspace(0,len(frames)-1,model.config.num_frames,dtype=int)
+                inputs = processor([frames[i] for i in targets],return_tensors='pt').to(next(model.parameters()).device)
+                scores = model(**inputs).logits.softmax(-1)[0].cpu().tolist()
+                result = decide(scores,model.config.id2label)
+                result['model'] = MODEL_ID if name == 'TimeSformer' else VIDEOMAE_ID
+            result['method'] = f'pretrained {name} classifier'
+            results.append(result)
+    accepted = {r['exercise'] for r in results}
+    exercise = results[0]['exercise'] if len(accepted)==1 else 'Unknown'
+    return {'exercise':exercise,'models':results,
+            'reason':'Models disagree' if len(accepted)>1 else results[0]['reason'],
+            'processing_seconds':round(__import__('time').perf_counter()-started,3)}
 
 def classify_video(path, status=None):
     import cv2

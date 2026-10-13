@@ -1,0 +1,263 @@
+{
+  "tests": {
+    "pushups": {
+      "recognition": {
+        "exercise": "Push-ups",
+        "models": [
+          {
+            "exercise": "Push-ups",
+            "predicted_activity": "push up",
+            "model_score": 0.991,
+            "top_predictions": [
+              {
+                "label": "push up",
+                "score": 0.991
+              },
+              {
+                "label": "mountain climber (exercise)",
+                "score": 0.007
+              },
+              {
+                "label": "stretching arm",
+                "score": 0.0006
+              },
+              {
+                "label": "stretching leg",
+                "score": 0.0003
+              },
+              {
+                "label": "exercising with an exercise ball",
+                "score": 0.0002
+              }
+            ],
+            "reason": "Supported exercise detected",
+            "model": "facebook/timesformer-base-finetuned-k600",
+            "method": "pretrained TimeSformer classifier"
+          },
+          {
+            "exercise": "Push-ups",
+            "predicted_activity": "push up",
+            "model_score": 0.7329,
+            "top_predictions": [
+              {
+                "label": "push up",
+                "score": 0.7329
+              },
+              {
+                "label": "pull ups",
+                "score": 0.0052
+              },
+              {
+                "label": "yoga",
+                "score": 0.0017
+              },
+              {
+                "label": "playing ukulele",
+                "score": 0.0015
+              },
+              {
+                "label": "windsurfing",
+                "score": 0.0015
+              }
+            ],
+            "reason": "Supported exercise detected",
+            "model": "MCG-NJU/videomae-base-finetuned-kinetics",
+            "method": "pretrained VideoMAE classifier"
+          }
+        ],
+        "reason": "Supported exercise detected",
+        "processing_seconds": 17.784,
+        "clips_analyzed": 1
+      },
+      "counting": {
+        "estimated_reps": 2.74456524848938,
+        "periodicity_score": 0.7214198112487793,
+        "stride": 2,
+        "method": "pretrained RepNet",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "form_assessment": "Unavailable: RepNet does not assess form",
+        "processing_seconds": 21.27,
+        "video_seconds": 11.64
+      },
+      "form_assessment": "Unavailable: no validated form-assessment checkpoint for these exercises",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "pose_visible_percent": 100.0,
+      "processing_seconds": 43.759,
+      "video_seconds": 11.64,
+      "input": "uploaded video",
+      "models": [
+        "TimeSformer/VideoMAE",
+        "RepNet",
+        "MediaPipe Pose Lite"
+      ],
+      "preview_updates": 12
+    },
+    "squat": {
+      "recognition": {
+        "exercise": "Squats",
+        "models": [
+          {
+            "exercise": "Squats",
+            "predicted_activity": "squat",
+            "model_score": 0.9952,
+            "top_predictions": [
+              {
+                "label": "squat",
+                "score": 0.9952
+              },
+              {
+                "label": "lunge",
+                "score": 0.0019
+              },
+              {
+                "label": "deadlifting",
+                "score": 0.0012
+              },
+              {
+                "label": "clean and jerk",
+                "score": 0.0009
+              },
+              {
+                "label": "snatch weight lifting",
+                "score": 0.0006
+              }
+            ],
+            "reason": "Supported exercise detected",
+            "model": "facebook/timesformer-base-finetuned-k600",
+            "method": "pretrained TimeSformer classifier"
+          },
+          {
+            "exercise": "Squats",
+            "predicted_activity": "squat",
+            "model_score": 0.7564,
+            "top_predictions": [
+              {
+                "label": "squat",
+                "score": 0.7564
+              },
+              {
+                "label": "lunge",
+                "score": 0.0063
+              },
+              {
+                "label": "clean and jerk",
+                "score": 0.0061
+              },
+              {
+                "label": "throwing ball",
+                "score": 0.0021
+              },
+              {
+                "label": "deadlifting",
+                "score": 0.0019
+              }
+            ],
+            "reason": "Supported exercise detected",
+            "model": "MCG-NJU/videomae-base-finetuned-kinetics",
+            "method": "pretrained VideoMAE classifier"
+          }
+        ],
+        "reason": "Supported exercise detected",
+        "processing_seconds": 19.933,
+        "clips_analyzed": 1
+      },
+      "counting": {
+        "estimated_reps": 1.0186147689819336,
+        "periodicity_score": 0.4053156077861786,
+        "stride": 2,
+        "method": "pretrained RepNet",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "form_assessment": "Unavailable: RepNet does not assess form",
+        "processing_seconds": 27.58,
+        "video_seconds": 20.487
+      },
+      "form_assessment": "Unavailable: no validated form-assessment checkpoint for these exercises",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "pose_visible_percent": 100.0,
+      "processing_seconds": 55.901,
+      "video_seconds": 20.487,
+      "input": "uploaded video",
+      "models": [
+        "TimeSformer/VideoMAE",
+        "RepNet",
+        "MediaPipe Pose Lite"
+      ],
+      "preview_updates": 19
+    },
+    "live_replay": {
+      "exercise": "Push-ups",
+      "estimated_reps": 2.07533597946167,
+      "analysed_seconds": 8.004999999999999,
+      "skipped_seconds": 0.0,
+      "pending_frames": 29,
+      "windows": 1,
+      "counted_windows": 1,
+      "processing_seconds": 13.204,
+      "result_age_seconds": 3.7600000000000007,
+      "status": "Movement model result available",
+      "error": null,
+      "recognition": {
+        "exercise": "Push-ups",
+        "models": [
+          {
+            "exercise": "Push-ups",
+            "predicted_activity": "push up",
+            "model_score": 0.9901,
+            "top_predictions": [
+              {
+                "label": "push up",
+                "score": 0.9901
+              },
+              {
+                "label": "mountain climber (exercise)",
+                "score": 0.0078
+              },
+              {
+                "label": "stretching arm",
+                "score": 0.0007
+              },
+              {
+                "label": "stretching leg",
+                "score": 0.0004
+              },
+              {
+                "label": "exercising with an exercise ball",
+                "score": 0.0002
+              }
+            ],
+            "reason": "Supported exercise detected",
+            "model": "facebook/timesformer-base-finetuned-k600",
+            "method": "pretrained TimeSformer classifier"
+          }
+        ],
+        "reason": "Supported exercise detected",
+        "processing_seconds": 8.926
+      },
+      "form_assessment": "Unavailable: no validated form model",
+      "last_window_end": 7.88,
+      "timeline": [
+        {
+          "seconds": 7.88,
+          "count": 2.07533597946167
+        }
+      ],
+      "test_type": "Accelerated internet-video replay through live scheduler; no physical webcam"
+    },
+    "camera_callback": {
+      "passed": true,
+      "seconds": 0.127
+    }
+  },
+  "sources": {
+    "pushups": "https://videos.pexels.com/video-files/4804794/4804794-hd_1920_1080_25fps.mp4",
+    "squat": "Existing local sample; original URL not recorded"
+  },
+  "manual_labels": {
+    "pushups": 3,
+    "squat": 2
+  }
+}
