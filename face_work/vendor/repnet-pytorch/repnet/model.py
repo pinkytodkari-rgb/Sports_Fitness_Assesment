@@ -9,7 +9,7 @@ CONVS_WITH_BIAS = [
     'stem.conv',
     'stages.0.blocks.0.downsample.conv', 'stages.0.blocks.0.conv3', 'stages.0.blocks.1.conv3', 'stages.0.blocks.2.conv3',
     'stages.1.blocks.0.downsample.conv', 'stages.1.blocks.0.conv3', 'stages.1.blocks.1.conv3', 'stages.1.blocks.2.conv3', 'stages.1.blocks.3.conv3',
-    'stages.2.blocks.0.downsample.conv', 'stages.2.blocks.0.conv3', 'stages.2.blocks.1.conv3', 'stages.2.blocks.2.conv3', 
+    'stages.2.blocks.0.downsample.conv', 'stages.2.blocks.0.conv3', 'stages.2.blocks.1.conv3', 'stages.2.blocks.2.conv3',
 ]
 
 # List of ResNet50V2 conv layers that uses stride 1 in the tensorflow implementation
@@ -178,7 +178,7 @@ class TranformerLayer(nn.Module):
 
 
 def _max_pool_block_forward(self, x):
-    """ 
+    """
     Custom `forward` function for the last block of each stage in ResNetV2, to have the same behavior as tensorflow.
     Original implementation: https://github.com/huggingface/pytorch-image-models/blob/4b8cfa6c0a355a9b3cb2a77298b240213fb3b921/timm/models/resnetv2.py#L197
     """

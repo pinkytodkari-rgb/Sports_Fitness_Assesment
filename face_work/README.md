@@ -60,4 +60,3 @@ Weights download on first use. Form assessment is unavailable; this screen does
 not use the legacy exercise-angle rules. It has **not passed real-time latency
 validation**. See [STAGED_IMPLEMENTATION.md](STAGED_IMPLEMENTATION.md) for measured
 test results and remaining stages. `app.py` below remains the earlier prototype.
-
