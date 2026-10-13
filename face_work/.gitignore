@@ -4,12 +4,6 @@ models/
 .streamlit/
 server*.log
 sample_videos/
-# Local/runtime files
-.venv/
-__pycache__/
-models/
-sample_videos/
-.streamlit/
-server*.log
 latency-*.log
 .publish-repo/
+screenshots/

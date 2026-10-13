@@ -54,6 +54,7 @@ def run_video(path, selected, preview, progress):
     seen = usable = index = 0
     snapshots = []
     last_frame = None
+    last_caption = None
     try:
         with mp.tasks.vision.PoseLandmarker.create_from_options(options) as model:
             while True:
@@ -83,11 +84,9 @@ def run_video(path, selected, preview, progress):
                 label = tracker.exercise if tracker else 'Recognizing: perform several complete movements'
                 phase = tracker.phase if tracker else 'Automatic recognition is experimental'
                 count = len(tracker.reps) if tracker else 0
-                cv2.rectangle(frame,(0,0),(w,85),(25,25,25),-1)
-                cv2.putText(frame,f'{label} | Completed: {count}',(12,28),cv2.FONT_HERSHEY_SIMPLEX,.6,(255,255,255),1)
-                cv2.putText(frame,phase,(12,55),cv2.FONT_HERSHEY_SIMPLEX,.5,(255,255,255),1)
+                last_caption = f'{label} · Completed: {count} · {phase}'
                 if seen%10 == 0:
-                    preview.image(frame,channels='BGR',width='stretch')
+                    preview.image(frame,channels='BGR',width='stretch',caption=last_caption)
                     if total > 0: progress.progress(min(index/total,1))
                 if tracker and count > len(snapshots):
                     snapshots.append(cv2.imencode('.jpg',frame)[1].tobytes())
@@ -95,7 +94,7 @@ def run_video(path, selected, preview, progress):
     finally: cap.release()
     if seen == 0: raise ValueError('No video frames could be decoded. Try an MP4 video.')
     progress.progress(1.0)
-    preview.image(last_frame,channels='BGR',width='stretch')
+    preview.image(last_frame,channels='BGR',width='stretch',caption=last_caption)
     reps = tracker.reps if tracker else []
     valid = sum(r['valid'] for r in reps)
     return {'exercise':tracker.exercise if tracker else 'Unknown', 'completed_reps':len(reps),
@@ -110,6 +109,15 @@ def run_video(path, selected, preview, progress):
             'standard':'Prototype rules; no official SAI rating', 'repetitions':reps}, snapshots
 
 st.set_page_config(page_title='Athlete Fitness Assessment',page_icon='🏃',layout='wide')
+st.markdown('''
+<style>
+[data-testid="stVideo"] video {
+    max-height: 420px;
+    object-fit: contain;
+    background: #0e1117;
+}
+</style>
+''', unsafe_allow_html=True)
 st.title('Athlete Fitness Assessment')
 st.write('Upload a fitness video to inspect movement, repetitions and visible form.')
 with st.sidebar:
@@ -122,11 +130,20 @@ with st.sidebar:
 st.info('Prototype: “valid” means the observed movement passed configured rules. Ratings are not official SAI scores. Keep one person fully visible and use the suggested camera view.')
 uploaded = st.file_uploader('Fitness video',type=['mp4','mov','avi','mkv','webm'])
 if uploaded:
-    st.video(uploaded)
-    if st.button('Analyze video',type='primary'):
+    analyze = st.button('Analyze video',type='primary')
+    source_col, analysis_col = st.columns(2,gap='large')
+    with source_col:
+        st.caption('Uploaded video')
+        st.video(uploaded,width='stretch')
+    with analysis_col:
+        st.caption('Pose-analysis preview')
+        preview = st.empty()
+        progress = st.progress(0)
+        if not analyze:
+            st.caption('The annotated preview will appear here during analysis.')
+    if analyze:
         st.session_state.pop('report',None)
         st.session_state.pop('snapshots',None)
-        preview,progress = st.empty(),st.progress(0)
         try:
             with tempfile.TemporaryDirectory() as folder:
                 path = Path(folder)/('input'+Path(uploaded.name).suffix)

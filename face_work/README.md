@@ -46,3 +46,18 @@ Jumping jacks use the pretrained MediaPipe Lite pose bundle; other exercises ret
 - https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker/python
 - https://huggingface.co/facebook/timesformer-base-finetuned-k600
 - Reference diagram: references/athlete-fitness-assessment-flow.png
+# Model-based Stage 1 experiment
+
+The new experimental screen runs with:
+
+```powershell
+python -m pip install -r requirements.txt
+python -m streamlit run model_stage.py --server.port 8502
+```
+
+It uses pretrained TimeSformer recognition and RepNet repetition estimation.
+Weights download on first use. Form assessment is unavailable; this screen does
+not use the legacy exercise-angle rules. It has **not passed real-time latency
+validation**. See [STAGED_IMPLEMENTATION.md](STAGED_IMPLEMENTATION.md) for measured
+test results and remaining stages. `app.py` below remains the earlier prototype.
+
