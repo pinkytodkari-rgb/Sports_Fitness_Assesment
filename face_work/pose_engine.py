@@ -110,7 +110,7 @@ class PoseEngine:
             MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
             import urllib.request
             urllib.request.urlretrieve(
-                'https://storage.googleapis.com/mediapipe-models/pose_landmarker_lite/float16/latest/pose_landmarker_lite.task',
+                'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task',
                 MODEL_PATH
             )
         base_options = mp.tasks.BaseOptions(model_asset_path=str(MODEL_PATH))
