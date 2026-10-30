@@ -1,0 +1,88 @@
+{
+  "pushups-repnet": {
+    "estimated_reps": 2.74456524848938,
+    "completed_reps": 2,
+    "periodicity_score": 0.7214198112487793,
+    "stride": 2,
+    "method": "pretrained RepNet",
+    "valid_reps": null,
+    "invalid_reps": null,
+    "form_assessment": "Unavailable: RepNet does not assess form",
+    "processing_seconds": 33.189,
+    "video_seconds": 11.64,
+    "recognition": {
+      "exercise": "Push-ups",
+      "predicted_activity": "push up",
+      "model_score": 0.9879,
+      "top_predictions": [
+        {
+          "label": "push up",
+          "score": 0.9879
+        },
+        {
+          "label": "mountain climber (exercise)",
+          "score": 0.0106
+        },
+        {
+          "label": "stretching arm",
+          "score": 0.0005
+        },
+        {
+          "label": "exercising with an exercise ball",
+          "score": 0.0003
+        },
+        {
+          "label": "stretching leg",
+          "score": 0.0002
+        }
+      ],
+      "reason": "Supported exercise detected",
+      "model": "facebook/timesformer-base-finetuned-k600",
+      "method": "pretrained TimeSformer Kinetics-600 classifier",
+      "clips_analyzed": 1
+    }
+  },
+  "squat": {
+    "estimated_reps": 1.2149217128753662,
+    "completed_reps": 1,
+    "periodicity_score": 0.5065929889678955,
+    "stride": 4,
+    "method": "pretrained RepNet",
+    "valid_reps": null,
+    "invalid_reps": null,
+    "form_assessment": "Unavailable: RepNet does not assess form",
+    "processing_seconds": 69.996,
+    "video_seconds": 20.487,
+    "recognition": {
+      "exercise": "Squats",
+      "predicted_activity": "squat",
+      "model_score": 0.9955,
+      "top_predictions": [
+        {
+          "label": "squat",
+          "score": 0.9955
+        },
+        {
+          "label": "lunge",
+          "score": 0.0024
+        },
+        {
+          "label": "clean and jerk",
+          "score": 0.0008
+        },
+        {
+          "label": "deadlifting",
+          "score": 0.0007
+        },
+        {
+          "label": "snatch weight lifting",
+          "score": 0.0005
+        }
+      ],
+      "reason": "Supported exercise detected",
+      "model": "facebook/timesformer-base-finetuned-k600",
+      "method": "pretrained TimeSformer Kinetics-600 classifier",
+      "clips_analyzed": 1
+    }
+  }
+}

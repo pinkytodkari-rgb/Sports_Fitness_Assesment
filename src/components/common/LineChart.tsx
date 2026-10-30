@@ -27,8 +27,8 @@ export const LineChart: React.FC<LineChartProps> = ({
 }) => {
   if (!data || data.length === 0) return null;
 
-  const chartColor = color && color !== '#00F2FE' ? color : colors.accent;
-  const gradientColor = gradientFrom && gradientFrom !== '#00F2FE' ? gradientFrom : colors.accent;
+  const chartColor = color || colors.primary;
+  const gradientColor = gradientFrom || colors.primary;
 
   const paddingHorizontal = 30;
   const paddingTop = 25;
@@ -51,7 +51,6 @@ export const LineChart: React.FC<LineChartProps> = ({
     return paddingTop + chartHeight - ((val - minVal) / range) * chartHeight;
   };
 
-  // Build SVG Path d string
   const points = data.map((d, i) => `${getX(i)},${getY(d.value)}`);
   const linePathD = `M ${points.join(' L ')}`;
 
@@ -77,7 +76,7 @@ export const LineChart: React.FC<LineChartProps> = ({
               y1={yPos}
               x2={width - paddingHorizontal}
               y2={yPos}
-              stroke="#E5E7EB"
+              stroke="#E2E8F0"
               strokeDasharray="4 4"
             />
           );
@@ -101,7 +100,7 @@ export const LineChart: React.FC<LineChartProps> = ({
                 y={height - 8}
                 fill={colors.textSecondary}
                 fontSize="10"
-                fontWeight="500"
+                fontWeight="600"
                 textAnchor="middle"
               >
                 {d.label}

@@ -18,7 +18,7 @@ export const ProgressRing: React.FC<ProgressRingProps> = ({
   color,
   label,
 }) => {
-  const activeColor = color && color !== '#00F2FE' ? color : colors.accent;
+  const activeColor = color || colors.primary;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (Math.min(100, Math.max(0, progress)) / 100) * circumference;
@@ -71,13 +71,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   scoreText: {
-    color: '#111827',
+    color: colors.textPrimary,
     fontWeight: '800',
   },
   labelText: {
     color: colors.textSecondary,
     marginTop: -2,
     textTransform: 'uppercase',
-    fontWeight: '600',
+    fontWeight: '700',
   },
 });

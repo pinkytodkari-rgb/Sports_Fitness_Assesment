@@ -39,6 +39,18 @@ export interface Athlete {
   notes?: string;
 }
 
+export type ExerciseType =
+  | 'pushups'
+  | 'squats'
+  | 'situps'
+  | 'jumping_jacks'
+  | 'lunges'
+  | 'bicep_curls'
+  | 'vertical_jump'
+  | 'shuttle_run'
+  | 'sprint'
+  | 'reaction';
+
 export interface DrillAssessment {
   id: string;
   title: string;
@@ -49,6 +61,11 @@ export interface DrillAssessment {
   targetMetric: string;
   iconName: string;
   bannerColor: string[];
+  exerciseType?: ExerciseType;
+  primaryAngleName?: string;
+  secondaryAngleName?: string;
+  formCriteria?: string[];
+  targetAngle?: string;
 }
 
 export interface AssessmentResult {
@@ -64,12 +81,17 @@ export interface AssessmentResult {
   consistency: number;
   stability: number;
   jointAngles: {
-    kneeFlexion: number;
-    hipAngle: number;
-    shoulderAlignment: number;
+    kneeFlexion?: number;
+    hipAngle?: number;
+    shoulderAlignment?: number;
+    primaryAngle?: number;
+    secondaryAngle?: number;
+    primaryAngleName?: string;
+    secondaryAngleName?: string;
   };
   recommendations: string[];
   durationSeconds: number;
+  exerciseType?: ExerciseType;
 }
 
 export interface NotificationItem {

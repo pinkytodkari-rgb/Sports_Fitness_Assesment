@@ -1,0 +1,114 @@
+{
+  "truncated_input": {
+    "passed": true,
+    "error": "Video decoding ended early. Upload a complete, uncorrupted video."
+  },
+  "short_input": {
+    "passed": true,
+    "error": "RepNet needs at least 64 sampled frames; use a longer clip."
+  },
+  "default_upload": {
+    "recognition": {
+      "exercise": "Push-ups",
+      "models": [
+        {
+          "exercise": "Push-ups",
+          "predicted_activity": "push up",
+          "model_score": 0.999,
+          "top_predictions": [
+            {
+              "label": "push up",
+              "score": 0.999
+            },
+            {
+              "label": "exercising arm",
+              "score": 0.0004
+            },
+            {
+              "label": "yoga",
+              "score": 0.0003
+            },
+            {
+              "label": "situp",
+              "score": 0.0001
+            },
+            {
+              "label": "pull ups",
+              "score": 0.0001
+            }
+          ],
+          "reason": "Supported exercise detected",
+          "model": "torchvision/S3D_KINETICS400_V1",
+          "method": "pretrained S3D classifier"
+        }
+      ],
+      "reason": "Supported exercise detected",
+      "processing_seconds": 5.228,
+      "clips_analyzed": 1
+    },
+    "counting": {
+      "estimated_reps": 2.74456524848938,
+      "periodicity_score": 0.7214198112487793,
+      "stride": 2,
+      "method": "pretrained RepNet",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "form_assessment": "Unavailable: RepNet does not assess form",
+      "processing_seconds": 19.244,
+      "video_seconds": 11.64
+    },
+    "counting_error": null,
+    "assessment_exercise": "Push-ups",
+    "exercise_source": "model",
+    "form_assessment": {
+      "status": "uncertain",
+      "label": "Uncertain",
+      "probabilities": {
+        "correct": 0.4244,
+        "incorrect": 0.5756
+      },
+      "observations": [
+        {
+          "seconds": 3.8,
+          "label": "Uncertain",
+          "probability_correct": 0.4175
+        },
+        {
+          "seconds": 5.04,
+          "label": "Uncertain",
+          "probability_correct": 0.4137
+        },
+        {
+          "seconds": 6.32,
+          "label": "Uncertain",
+          "probability_correct": 0.4659
+        },
+        {
+          "seconds": 7.76,
+          "label": "Uncertain",
+          "probability_correct": 0.4003
+        }
+      ],
+      "exercise": "Push-ups",
+      "model": "sakkysakky/vit-pushup-form-classifier",
+      "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+      "processor_source": "google/vit-base-patch16-224",
+      "experimental": true,
+      "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "processing_seconds": 18.577
+    },
+    "valid_reps": null,
+    "invalid_reps": null,
+    "pose_visible_percent": null,
+    "processing_seconds": 46.307,
+    "video_seconds": 11.64,
+    "input": "uploaded video",
+    "models": [
+      "torchvision/S3D_KINETICS400_V1",
+      "RepNet",
+      "sakkysakky/vit-pushup-form-classifier"
+    ]
+  }
+}

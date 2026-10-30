@@ -56,8 +56,8 @@ export const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
             style={styles.menuRow}
             activeOpacity={0.8}
           >
-            <Ionicons name="document-text-outline" size={20} color={colors.accent} />
-            <Text style={styles.menuText}>My Scout Reports & PDFs</Text>
+            <Ionicons name="document-text-outline" size={20} color={colors.secondary} />
+            <Text style={styles.menuText}>My Scout Reports & Evidence</Text>
             <Ionicons name="chevron-forward-outline" size={18} color={colors.textMuted} />
           </TouchableOpacity>
 
@@ -77,7 +77,7 @@ export const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
             activeOpacity={0.8}
           >
             <Ionicons name="settings-outline" size={20} color={colors.textSecondary} />
-            <Text style={styles.menuText}>Account Settings & Security</Text>
+            <Text style={styles.menuText}>Consent & Account Privacy</Text>
             <Ionicons name="chevron-forward-outline" size={18} color={colors.textMuted} />
           </TouchableOpacity>
         </View>
@@ -139,7 +139,7 @@ export const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.background,
   },
   scrollContent: {
     padding: spacing.lg,
@@ -147,9 +147,9 @@ const styles = StyleSheet.create({
   },
   menuContainer: {
     backgroundColor: '#FFFFFF',
-    borderRadius: borderRadius.card, // 18px
+    borderRadius: borderRadius.card,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     overflow: 'hidden',
     ...shadows.card,
   },
@@ -158,14 +158,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: spacing.lg,
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    borderBottomColor: colors.surfaceBorder,
     gap: spacing.md,
   },
   menuText: {
     flex: 1,
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   modalForm: {
     gap: spacing.sm,
@@ -179,8 +179,8 @@ const styles = StyleSheet.create({
   modalInput: {
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#E5E7EB',
-    borderRadius: borderRadius.input, // 12px
+    borderColor: colors.surfaceBorder,
+    borderRadius: borderRadius.input,
     height: 52,
     paddingHorizontal: spacing.md,
     color: colors.textPrimary,

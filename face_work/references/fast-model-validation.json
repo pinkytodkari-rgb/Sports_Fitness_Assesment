@@ -1,0 +1,134 @@
+{
+  "pushups-repnet": {
+    "exercise": "Push-ups",
+    "models": [
+      {
+        "exercise": "Push-ups",
+        "predicted_activity": "push up",
+        "model_score": 0.999,
+        "top_predictions": [
+          {
+            "label": "push up",
+            "score": 0.999
+          },
+          {
+            "label": "exercising arm",
+            "score": 0.0004
+          },
+          {
+            "label": "yoga",
+            "score": 0.0003
+          },
+          {
+            "label": "situp",
+            "score": 0.0001
+          },
+          {
+            "label": "pull ups",
+            "score": 0.0001
+          }
+        ],
+        "reason": "Supported exercise detected",
+        "model": "torchvision/S3D_KINETICS400_V1",
+        "method": "pretrained S3D classifier"
+      }
+    ],
+    "reason": "Supported exercise detected",
+    "processing_seconds": 8.744
+  },
+  "squat": {
+    "exercise": "Squats",
+    "models": [
+      {
+        "exercise": "Squats",
+        "predicted_activity": "squat",
+        "model_score": 0.9852,
+        "top_predictions": [
+          {
+            "label": "squat",
+            "score": 0.9852
+          },
+          {
+            "label": "lunge",
+            "score": 0.0126
+          },
+          {
+            "label": "snatch weight lifting",
+            "score": 0.0015
+          },
+          {
+            "label": "pull ups",
+            "score": 0.0003
+          },
+          {
+            "label": "front raises",
+            "score": 0.0001
+          }
+        ],
+        "reason": "Supported exercise detected",
+        "model": "torchvision/S3D_KINETICS400_V1",
+        "method": "pretrained S3D classifier"
+      }
+    ],
+    "reason": "Supported exercise detected",
+    "processing_seconds": 3.726
+  },
+  "live_replay": {
+    "exercise": "Push-ups",
+    "estimated_reps": 2.07533597946167,
+    "analysed_seconds": 8.004999999999999,
+    "skipped_seconds": 0.0,
+    "pending_frames": 29,
+    "windows": 1,
+    "counted_windows": 1,
+    "processing_seconds": 7.305,
+    "result_age_seconds": 3.7600000000000007,
+    "status": "Movement model result available",
+    "error": null,
+    "recognition": {
+      "exercise": "Push-ups",
+      "models": [
+        {
+          "exercise": "Push-ups",
+          "predicted_activity": "push up",
+          "model_score": 0.9991,
+          "top_predictions": [
+            {
+              "label": "push up",
+              "score": 0.9991
+            },
+            {
+              "label": "pull ups",
+              "score": 0.0003
+            },
+            {
+              "label": "headbanging",
+              "score": 0.0001
+            },
+            {
+              "label": "yoga",
+              "score": 0.0001
+            },
+            {
+              "label": "exercising arm",
+              "score": 0.0001
+            }
+          ],
+          "reason": "Supported exercise detected",
+          "model": "torchvision/S3D_KINETICS400_V1",
+          "method": "pretrained S3D classifier"
+        }
+      ],
+      "reason": "Supported exercise detected",
+      "processing_seconds": 4.631
+    },
+    "form_assessment": "Unavailable: no validated form model",
+    "last_window_end": 7.88,
+    "timeline": [
+      {
+        "seconds": 7.88,
+        "count": 2.07533597946167
+      }
+    ]
+  }
+}

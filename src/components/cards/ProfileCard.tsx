@@ -17,7 +17,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ user, onEditPress }) =
         <View style={styles.info}>
           <View style={styles.nameRow}>
             <Text style={styles.name}>{user.name}</Text>
-            <Ionicons name="checkmark-circle" size={18} color={colors.accent} />
+            <Ionicons name="checkmark-circle" size={18} color={colors.primary} />
           </View>
           <Text style={styles.roleText}>{user.sport || 'Athlete'} • {user.position || 'Player'}</Text>
           <Text style={styles.email}>{user.email}</Text>
@@ -53,11 +53,11 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ user, onEditPress }) =
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: borderRadius.card, // 18px
-    padding: spacing.lg, // 20-24px
+    borderRadius: borderRadius.card,
+    padding: spacing.lg,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     marginBottom: spacing.md,
     ...shadows.card,
   },
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     height: 64,
     borderRadius: 32,
     borderWidth: 2,
-    borderColor: colors.accent,
+    borderColor: colors.primary,
   },
   info: {
     flex: 1,
@@ -82,14 +82,14 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   name: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 19,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   roleText: {
-    color: colors.accent,
+    color: colors.primary,
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: '700',
     marginTop: 2,
   },
   email: {
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
   },
   editBtn: {
     padding: spacing.xs,
-    backgroundColor: '#F1F5F9',
+    backgroundColor: 'rgba(255, 85, 0, 0.12)',
     borderRadius: borderRadius.sm,
   },
   bio: {
@@ -111,29 +111,29 @@ const styles = StyleSheet.create({
   statsRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.surfaceLight,
     borderRadius: borderRadius.sm,
     paddingVertical: spacing.sm,
     marginTop: spacing.md,
     borderWidth: 1,
-    borderColor: '#F1F5F9',
+    borderColor: colors.surfaceBorder,
   },
   statCol: {
     alignItems: 'center',
   },
   statVal: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   statLbl: {
     color: colors.textSecondary,
     fontSize: 10,
-    fontWeight: '600',
+    fontWeight: '700',
     marginTop: 2,
   },
   divider: {
     width: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: colors.surfaceBorder,
   },
 });

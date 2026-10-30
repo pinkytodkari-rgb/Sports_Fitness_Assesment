@@ -65,7 +65,6 @@ export const GradientButton: React.FC<GradientButtonProps> = ({
     );
   }
 
-  // Primary Button: Dark Navy #0B1F3A, Height 52px, Radius 14px, White Text
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -88,21 +87,21 @@ export const GradientButton: React.FC<GradientButtonProps> = ({
 const styles = StyleSheet.create({
   primaryContainer: {
     height: 52,
-    backgroundColor: colors.primary, // #0B1F3A
+    backgroundColor: colors.primary, // #FF5500
     borderRadius: borderRadius.button, // 14px
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: spacing.lg,
-    shadowColor: '#0B1F3A',
+    shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.35,
     shadowRadius: 10,
-    elevation: 3,
+    elevation: 4,
   },
   outlineContainer: {
     height: 52,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'transparent',
     borderRadius: borderRadius.button, // 14px
     borderWidth: 1.5,
     borderColor: colors.primary,
@@ -123,13 +122,13 @@ const styles = StyleSheet.create({
   text: {
     color: '#FFFFFF',
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
     letterSpacing: 0.2,
   },
   outlineText: {
     color: colors.primary,
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   icon: {
     marginRight: spacing.xs,

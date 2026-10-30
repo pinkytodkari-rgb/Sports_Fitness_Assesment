@@ -20,6 +20,7 @@ import { AIFeedbackScreen } from '../screens/athlete/AIFeedbackScreen';
 import { ReportsScreen } from '../screens/athlete/ReportsScreen';
 import { AchievementsScreen } from '../screens/athlete/AchievementsScreen';
 import { ProfileScreen } from '../screens/athlete/ProfileScreen';
+import { NutritionCoachScreen } from '../screens/athlete/NutritionCoachScreen';
 
 import { CoachDashboardScreen } from '../screens/coach/CoachDashboardScreen';
 import { AthleteDiscoveryScreen } from '../screens/coach/AthleteDiscoveryScreen';
@@ -70,6 +71,7 @@ export const RootNavigator: React.FC = () => {
         <Stack.Screen name="Reports" component={ReportsScreen} />
         <Stack.Screen name="Achievements" component={AchievementsScreen} />
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="NutritionCoach" component={NutritionCoachScreen} />
 
         {/* Coach Flow Stack */}
         <Stack.Screen name="CoachDashboard" component={CoachDashboardScreen} />

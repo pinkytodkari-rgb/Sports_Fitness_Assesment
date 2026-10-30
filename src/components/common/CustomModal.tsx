@@ -45,7 +45,7 @@ export const CustomModal: React.FC<CustomModalProps> = ({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(11, 31, 58, 0.4)',
+    backgroundColor: 'rgba(15, 23, 42, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
     padding: spacing.lg,
@@ -54,9 +54,9 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 440,
     backgroundColor: '#FFFFFF',
-    borderRadius: borderRadius.card, // 18px
+    borderRadius: borderRadius.card,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     overflow: 'hidden',
     ...shadows.floating,
   },
@@ -67,12 +67,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    borderBottomColor: colors.surfaceBorder,
   },
   title: {
     fontSize: 18,
-    fontWeight: '700',
-    color: colors.primary, // #0B1F3A
+    fontWeight: '800',
+    color: colors.textPrimary,
   },
   closeBtn: {
     padding: spacing.xs,

@@ -12,9 +12,9 @@ interface AssessmentCardProps {
 
 export const AssessmentCard: React.FC<AssessmentCardProps> = ({ drill, onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.85} style={styles.container}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.88} style={styles.container}>
       <LinearGradient
-        colors={['#0B1F3A', '#1E3A8A']}
+        colors={['#FF5500', '#FF7A00']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.bannerGradient}
@@ -25,7 +25,7 @@ export const AssessmentCard: React.FC<AssessmentCardProps> = ({ drill, onPress }
           </View>
 
           <View style={styles.diffChip}>
-            <Ionicons name="sparkles-outline" size={12} color="#FFFFFF" />
+            <Ionicons name="sparkles" size={12} color="#FFFFFF" />
             <Text style={styles.diffText}>{drill.difficulty}</Text>
           </View>
         </View>
@@ -48,13 +48,13 @@ export const AssessmentCard: React.FC<AssessmentCardProps> = ({ drill, onPress }
           </View>
 
           <View style={styles.metaItem}>
-            <Ionicons name="trophy-outline" size={14} color={colors.accent} />
-            <Text style={[styles.metaText, { color: colors.accent }]}>{drill.targetMetric}</Text>
+            <Ionicons name="trophy-outline" size={14} color={colors.primary} />
+            <Text style={[styles.metaText, { color: colors.primary }]}>{drill.targetMetric}</Text>
           </View>
 
           <View style={styles.startBtn}>
             <Text style={styles.startBtnText}>Start Test</Text>
-            <Ionicons name="play-circle-outline" size={16} color={colors.primary} />
+            <Ionicons name="play-circle" size={16} color={colors.primary} />
           </View>
         </View>
       </View>
@@ -64,11 +64,11 @@ export const AssessmentCard: React.FC<AssessmentCardProps> = ({ drill, onPress }
 
 const styles = StyleSheet.create({
   container: {
-    borderRadius: borderRadius.card, // 18px
+    borderRadius: borderRadius.card,
     overflow: 'hidden',
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     marginBottom: spacing.md,
     ...shadows.card,
   },
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   categoryChip: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: borderRadius.pill,
@@ -91,14 +91,15 @@ const styles = StyleSheet.create({
   categoryText: {
     color: '#FFFFFF',
     fontSize: 10,
-    fontWeight: '700',
+    fontWeight: '800',
     textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
   diffChip: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    backgroundColor: 'rgba(0, 0, 0, 0.25)',
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: borderRadius.pill,
@@ -112,12 +113,12 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   content: {
-    padding: spacing.lg, // 20-24px
+    padding: spacing.lg,
   },
   title: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 17,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   description: {
     color: colors.textSecondary,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
     paddingTop: spacing.sm,
     borderTopWidth: 1,
-    borderTopColor: '#F1F5F9',
+    borderTopColor: colors.surfaceBorder,
   },
   metaItem: {
     flexDirection: 'row',
@@ -152,6 +153,6 @@ const styles = StyleSheet.create({
   startBtnText: {
     color: colors.primary,
     fontSize: 13,
-    fontWeight: '700',
+    fontWeight: '800',
   },
 });

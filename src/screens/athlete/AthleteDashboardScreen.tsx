@@ -20,8 +20,9 @@ export const AthleteDashboardScreen: React.FC<{ navigation: any }> = ({ navigati
       <TopHeader navigation={navigation} />
 
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Dynamic Welcome Hero Card */}
+        {/* Dynamic Welcome Hero Card - Clean Light & Orange Athletic Hero */}
         <View style={styles.heroCard}>
+          <View style={styles.heroAccentBar} />
           <View style={styles.heroInner}>
             <View style={styles.heroRow}>
               <View style={styles.heroTextWrapper}>
@@ -34,15 +35,15 @@ export const AthleteDashboardScreen: React.FC<{ navigation: any }> = ({ navigati
                 <TouchableOpacity
                   onPress={() => navigation.navigate('LiveAssessment', { drill: assessmentsData[0] })}
                   style={styles.heroCTA}
-                  activeOpacity={0.8}
+                  activeOpacity={0.85}
                 >
-                  <Ionicons name="play-circle" size={18} color="#0B1F3A" />
+                  <Ionicons name="play-circle" size={18} color="#FFFFFF" />
                   <Text style={styles.heroCTAText}>Quick Assessment</Text>
                 </TouchableOpacity>
               </View>
 
               <View style={styles.progressWrapper}>
-                <ProgressRing progress={96} size={94} strokeWidth={8} color="#38BDF8" label="AI INDEX" />
+                <ProgressRing progress={96} size={94} strokeWidth={8} color={colors.primary} label="AI INDEX" />
               </View>
             </View>
           </View>
@@ -50,8 +51,8 @@ export const AthleteDashboardScreen: React.FC<{ navigation: any }> = ({ navigati
 
         {/* Quick Stats Grid */}
         <View style={styles.statsGrid}>
-          <StatCard title="Overall AI Rating" value="96.4" icon="shield-checkmark-outline" trend="+2.4% this week" color={colors.accent} />
-          <StatCard title="Total Drills" value="28" icon="fitness-outline" subtitle="8 tests verified" color={colors.primary} />
+          <StatCard title="Overall AI Rating" value="96.4" icon="shield-checkmark-outline" trend="+2.4% this week" color={colors.primary} />
+          <StatCard title="Total Drills" value="28" icon="fitness-outline" subtitle="8 tests verified" color={colors.secondary} />
         </View>
 
         {/* Featured Drills Section */}
@@ -62,7 +63,7 @@ export const AthleteDashboardScreen: React.FC<{ navigation: any }> = ({ navigati
           onActionPress={() => navigation.navigate('AssessmentCenterTab')}
         />
 
-        {assessmentsData.slice(0, 2).map((drill) => (
+        {assessmentsData.slice(0, 3).map((drill) => (
           <AssessmentCard
             key={drill.id}
             drill={drill as DrillAssessment}
@@ -77,12 +78,38 @@ export const AthleteDashboardScreen: React.FC<{ navigation: any }> = ({ navigati
           activeOpacity={0.85}
         >
           <View style={styles.feedbackInner}>
-            <Ionicons name="bulb-outline" size={24} color={colors.accent} />
+            <View style={styles.bulbWrapper}>
+              <Ionicons name="bulb" size={20} color={colors.primary} />
+            </View>
             <View style={styles.feedbackTextGroup}>
               <Text style={styles.feedbackTitle}>AI Coach Recommendation</Text>
-              <Text style={styles.feedbackSub}>"Explosive first step strength is in top 1%. Increase knee flexion stability on landings."</Text>
+              <Text style={styles.feedbackSub}>"Push-up elbow depth exceeded 90° standard. Focus on maintaining symmetric knee drive on landings."</Text>
             </View>
             <Ionicons name="chevron-forward-outline" size={18} color={colors.textSecondary} />
+          </View>
+        </TouchableOpacity>
+
+        {/* AI Sports Nutrition & Fuel Strategy Card */}
+        <TouchableOpacity
+          onPress={() => navigation.navigate('NutritionCoach')}
+          style={styles.nutritionCard}
+          activeOpacity={0.85}
+        >
+          <View style={styles.nutritionInner}>
+            <View style={styles.nutritionIconBox}>
+              <Ionicons name="restaurant" size={22} color="#FFFFFF" />
+            </View>
+            <View style={styles.nutritionTextGroup}>
+              <View style={styles.nutritionTagRow}>
+                <Text style={styles.nutritionTagText}>AI RECOVERY & NUTRITION</Text>
+                <View style={styles.activeDot} />
+              </View>
+              <Text style={styles.nutritionTitle}>Custom Fuel Blueprints</Text>
+              <Text style={styles.nutritionSub}>
+                Get 3-4 tailored meals, exact macros & hydration protocols mapped to your training activity.
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={18} color={colors.primary} />
           </View>
         </TouchableOpacity>
 
@@ -114,21 +141,29 @@ export const AthleteDashboardScreen: React.FC<{ navigation: any }> = ({ navigati
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.background,
   },
   scrollContent: {
     padding: spacing.lg,
     paddingBottom: 100,
   },
   heroCard: {
-    borderRadius: borderRadius.card, // 18px
+    borderRadius: borderRadius.card,
     overflow: 'hidden',
-    backgroundColor: '#0B1F3A', // Dark Navy Brand Hero
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: colors.surfaceBorder,
     marginBottom: spacing.md,
+    position: 'relative',
     ...shadows.card,
   },
+  heroAccentBar: {
+    height: 4,
+    backgroundColor: colors.primary,
+    width: '100%',
+  },
   heroInner: {
-    padding: spacing.lg, // 20-24px
+    padding: spacing.lg,
   },
   heroRow: {
     flexDirection: 'row',
@@ -140,20 +175,20 @@ const styles = StyleSheet.create({
     marginRight: spacing.md,
   },
   greetingText: {
-    color: '#93C5FD',
+    color: colors.primary,
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: '800',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   heroTitle: {
-    color: '#FFFFFF',
+    color: colors.textPrimary,
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: '800',
     marginTop: 4,
   },
   heroDesc: {
-    color: '#E2E8F0',
+    color: colors.textSecondary,
     fontSize: 12,
     marginTop: 4,
     lineHeight: 18,
@@ -162,15 +197,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.primary,
     paddingHorizontal: spacing.md,
     paddingVertical: 10,
     borderRadius: borderRadius.button,
     alignSelf: 'flex-start',
     marginTop: spacing.md,
+    ...shadows.glow,
   },
   heroCTAText: {
-    color: '#0B1F3A',
+    color: '#FFFFFF',
     fontSize: 13,
     fontWeight: '700',
   },
@@ -184,10 +220,10 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   feedbackBanner: {
-    borderRadius: borderRadius.card, // 18px
-    backgroundColor: '#EFF6FF',
+    borderRadius: borderRadius.card,
+    backgroundColor: '#FFF7ED',
     borderWidth: 1,
-    borderColor: '#DBEAFE',
+    borderColor: '#FED7AA',
     marginVertical: spacing.md,
     ...shadows.soft,
   },
@@ -197,11 +233,19 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
     gap: spacing.md,
   },
+  bulbWrapper: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: 'rgba(255, 85, 0, 0.15)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   feedbackTextGroup: {
     flex: 1,
   },
   feedbackTitle: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 14,
     fontWeight: '700',
   },
@@ -211,6 +255,61 @@ const styles = StyleSheet.create({
     marginTop: 2,
     fontStyle: 'italic',
   },
+  nutritionCard: {
+    borderRadius: borderRadius.card,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderColor: '#FED7AA',
+    marginBottom: spacing.md,
+    ...shadows.soft,
+  },
+  nutritionInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: spacing.md,
+    gap: spacing.md,
+  },
+  nutritionIconBox: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    ...shadows.glow,
+  },
+  nutritionTextGroup: {
+    flex: 1,
+  },
+  nutritionTagRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginBottom: 2,
+  },
+  nutritionTagText: {
+    fontSize: 9,
+    fontWeight: '800',
+    color: colors.primary,
+    letterSpacing: 0.5,
+  },
+  activeDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: colors.emerald,
+  },
+  nutritionTitle: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: colors.textPrimary,
+  },
+  nutritionSub: {
+    fontSize: 11,
+    color: colors.textSecondary,
+    lineHeight: 15,
+    marginTop: 2,
+  },
   leaderboardRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -219,20 +318,20 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.card,
     marginBottom: spacing.xs,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     ...shadows.soft,
   },
   rankNum: {
     color: colors.primary,
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '800',
     width: 36,
   },
   leaderInfo: {
     flex: 1,
   },
   leaderName: {
-    color: colors.primary,
+    color: colors.textPrimary,
     fontSize: 15,
     fontWeight: '700',
   },
@@ -241,7 +340,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   leaderScoreBadge: {
-    backgroundColor: '#0B1F3A',
+    backgroundColor: colors.primary,
     paddingHorizontal: 12,
     paddingVertical: 5,
     borderRadius: borderRadius.pill,
@@ -249,6 +348,6 @@ const styles = StyleSheet.create({
   leaderScoreText: {
     color: '#FFFFFF',
     fontSize: 14,
-    fontWeight: '700',
+    fontWeight: '800',
   },
 });

@@ -1,0 +1,16 @@
+[
+  {
+    "query": "",
+    "finished": true,
+    "errors": [],
+    "components": []
+  },
+  {
+    "query": "input=camera",
+    "finished": true,
+    "errors": [],
+    "components": [
+      "streamlit_webrtc.component.webrtc_streamer"
+    ]
+  }
+]

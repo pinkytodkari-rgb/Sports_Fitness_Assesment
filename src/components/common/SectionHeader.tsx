@@ -43,9 +43,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: '800',
     letterSpacing: -0.3,
   },
   subtitle: {
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   actionText: {
-    color: colors.accent, // #2563EB
+    color: colors.primary,
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 });

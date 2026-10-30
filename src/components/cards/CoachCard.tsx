@@ -6,7 +6,7 @@ import coachData from '../../data/coach.json';
 
 export const CoachCard: React.FC<{ onPress?: () => void }> = ({ onPress }) => {
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.85} style={styles.card}>
+    <TouchableOpacity onPress={onPress} activeOpacity={0.88} style={styles.card}>
       <View style={styles.row}>
         <Image source={{ uri: coachData.avatar }} style={styles.avatar} />
 
@@ -40,11 +40,11 @@ export const CoachCard: React.FC<{ onPress?: () => void }> = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: borderRadius.card, // 18px
-    padding: spacing.lg, // 20-24px
+    borderRadius: borderRadius.card,
+    padding: spacing.lg,
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     marginBottom: spacing.md,
     ...shadows.card,
   },
@@ -69,23 +69,25 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   name: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 17,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 3,
-    backgroundColor: '#DBEAFE',
+    backgroundColor: 'rgba(255, 170, 0, 0.12)',
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: borderRadius.pill,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 170, 0, 0.25)',
   },
   badgeText: {
     color: colors.secondary,
     fontSize: 9,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   role: {
     color: colors.textSecondary,
@@ -93,9 +95,9 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   team: {
-    color: colors.accent,
+    color: colors.primary,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
     marginTop: 2,
   },
   footer: {
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
     paddingTop: spacing.sm,
     borderTopWidth: 1,
-    borderTopColor: '#F1F5F9',
+    borderTopColor: colors.surfaceBorder,
   },
   stat: {
     alignItems: 'center',
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
   statVal: {
     color: colors.primary,
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   statLbl: {
     color: colors.textSecondary,
@@ -121,6 +123,6 @@ const styles = StyleSheet.create({
   },
   divider: {
     width: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: colors.surfaceBorder,
   },
 });

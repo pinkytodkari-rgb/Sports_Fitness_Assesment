@@ -27,15 +27,14 @@ export const RadarChart: React.FC<RadarChartProps> = ({
   labelOne,
   labelTwo,
 }) => {
-  const chartPrimary = primaryColor && primaryColor !== '#00F2FE' ? primaryColor : colors.primary; // #0B1F3A
-  const chartComp = comparisonColor && comparisonColor !== '#7F00FF' ? comparisonColor : colors.accent; // #2563EB
+  const chartPrimary = primaryColor || colors.primary; // #FF5500
+  const chartComp = comparisonColor || colors.secondary; // #FFAA00
 
   const center = size / 2;
   const radius = size * 0.36;
   const numAxes = data.length;
   const angleStep = (2 * Math.PI) / numAxes;
 
-  // Helper to convert polar coordinates to Cartesian
   const getCoordinates = (index: number, val: number) => {
     const angle = index * angleStep - Math.PI / 2;
     const r = (val / 100) * radius;
@@ -44,10 +43,8 @@ export const RadarChart: React.FC<RadarChartProps> = ({
     return { x, y };
   };
 
-  // Concentric background grid polygons (20%, 40%, 60%, 80%, 100%)
   const gridLevels = [0.2, 0.4, 0.6, 0.8, 1.0];
 
-  // Data polygon points
   const primaryPoints = data
     .map((d, i) => {
       const { x, y } = getCoordinates(i, d.value);
@@ -80,7 +77,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({
               key={`ring-${idx}`}
               points={ringPoints}
               fill="none"
-              stroke="#E5E7EB"
+              stroke="#E2E8F0"
               strokeWidth="1"
             />
           );
@@ -96,7 +93,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({
               y1={center}
               x2={x}
               y2={y}
-              stroke="#E5E7EB"
+              stroke="#E2E8F0"
               strokeWidth="1"
             />
           );
@@ -115,7 +112,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({
         {/* Primary Data Shape */}
         <Polygon
           points={primaryPoints}
-          fill={`${chartPrimary}25`}
+          fill={`${chartPrimary}20`}
           stroke={chartPrimary}
           strokeWidth="2.5"
         />
@@ -128,10 +125,10 @@ export const RadarChart: React.FC<RadarChartProps> = ({
               key={`dot-${i}`}
               cx={x}
               cy={y}
-              r="4"
+              r="4.5"
               fill={chartPrimary}
               stroke="#FFFFFF"
-              strokeWidth="1.5"
+              strokeWidth="2"
             />
           );
         })}
@@ -146,7 +143,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({
               y={y}
               fill={colors.textSecondary}
               fontSize="10"
-              fontWeight="600"
+              fontWeight="700"
               textAnchor="middle"
               alignmentBaseline="middle"
             >
