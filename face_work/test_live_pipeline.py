@@ -1,5 +1,6 @@
 """Live scheduling tests; not claims of learned-model accuracy."""
 import unittest
+from unittest.mock import patch
 from threading import Event
 import numpy as np
 from live_pipeline import LivePipeline
@@ -8,6 +9,11 @@ def recognised(frames,backend): return {'exercise':'Push-ups'}
 def count(frames): return {'estimated_reps':1.25}
 
 class LiveTests(unittest.TestCase):
+    def setUp(self):
+        self.form_patch = patch('live_pipeline.assess_form',return_value={
+            'status':'assessed','label':'Correct','model':'unit-test-stub','reason':'test only'})
+        self.form_patch.start()
+        self.addCleanup(self.form_patch.stop)
     def feed(self,engine,start=0):
         for i in range(64): engine.submit(np.full((2,2,3),i,dtype=np.uint8),(start+i)/8)
 
@@ -26,6 +32,7 @@ class LiveTests(unittest.TestCase):
             self.assertEqual(result['analysed_seconds'],16)
             self.assertEqual(windows,[list(range(64)),list(range(64))])
             self.assertEqual(result['skipped_seconds'],0)
+            self.assertEqual(result['form_assessment']['label'],'Correct')
         finally: engine.close()
 
     def test_unknown_does_not_count(self):
@@ -35,6 +42,16 @@ class LiveTests(unittest.TestCase):
             self.feed(engine); engine.wait()
             self.assertEqual(engine.snapshot()['estimated_reps'],0)
             self.assertEqual(engine.snapshot()['exercise'],'Unknown')
+        finally: engine.close()
+
+    def test_user_exercise_is_not_reported_as_automatic_recognition(self):
+        engine = LivePipeline(counter=count,recognizer=lambda f,b:{'exercise':'Unknown'},exercise_hint='Biceps curls')
+        try:
+            self.feed(engine); engine.wait()
+            result = engine.snapshot()
+            self.assertEqual(result['exercise'],'Biceps curls')
+            self.assertEqual(result['exercise_source'],'user')
+            self.assertEqual(result['recognition']['exercise'],'Unknown')
         finally: engine.close()
 
     def test_overload_is_bounded_and_reported(self):
@@ -60,9 +77,11 @@ class LiveTests(unittest.TestCase):
         try:
             self.feed(engine); engine.wait()
             result = engine.snapshot()
-            self.assertEqual(result['windows'],0)
-            self.assertEqual(result['error'],'Unavailable model')
-            self.assertEqual(result['skipped_seconds'],8)
+            self.assertEqual(result['windows'],1)
+            self.assertEqual(result['counted_windows'],0)
+            self.assertEqual(result['estimated_reps'],0)
+            self.assertEqual(result['error'],'Counting failed: Unavailable model')
+            self.assertEqual(result['form_assessment']['label'],'Correct')
         finally: engine.close()
 
     def test_gap_discards_partial_window_and_close_ignores_frames(self):

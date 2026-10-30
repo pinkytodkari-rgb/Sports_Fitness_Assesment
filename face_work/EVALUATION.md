@@ -1,4 +1,28 @@
-# Current model-only evaluation — 2026-10-13
+# Model-only evaluation
+
+## Current posture update — 2026-10-15
+
+Correct/incorrect push-up image classification is now integrated into uploads and
+live windows using a trained ViT checkpoint. It remains experimental; other
+exercises still do not have form assessment. No angle rules were restored.
+
+- 17 software tests passed, including label-ID handling, uncertainty, unsupported
+  exercise rejection, failed weights and preserving posture results if counting fails.
+- Both Correct and Incorrect labels were checked in the upload UI, including when
+  counting is unavailable. Real-server upload and camera-component screens passed.
+- Eight public labelled clips: 7 predictions matched labels and 1 abstained.
+  Dataset/model training overlap is unknown: this is not held-out accuracy.
+- Actual end-to-end upload tests produced Correct and Incorrect on the respective
+  labelled clips. Actual live-scheduler replay also ran form inference.
+- An unrelated Pexels push-up video returned Uncertain; this limitation is retained.
+- Preprocessing is inferred from the documented base model because the publisher
+  omits a processor file; predictions are explicitly experimental.
+
+Details: [POSTURE_ASSESSMENT.md](POSTURE_ASSESSMENT.md),
+`references/posture-validation.json`, `references/posture-integration.json`.
+The older timing and availability statements below describe the October 13 build.
+
+## Historical model-only evaluation — 2026-10-13
 
 ## Checks performed
 
@@ -73,3 +97,16 @@ Model-source benchmark scores should be reported separately from application
 accuracy; see each original model card. Future validation requires held-out labelled
 videos for each exercise, non-exercise footage, poor visibility, different camera
 angles, pauses, cadence changes, and long live sessions.
+# 15 October: multi-exercise data experiment
+
+Downloaded sixteen instructor-feedback-labelled QEVD clips and trained separate
+ViT-feature linear candidates. Jacks: 1/2 held-out source-session clips correct;
+squats: 2/2. Both remain disabled: weak labels, tiny evaluation, unknown participant
+overlap and source orientation/scene bias. These are not application accuracy
+figures. See ONLINE_FORM_DATA.md and references/multi-exercise-form-candidates.json.
+
+Software validation: 25 tests passed with `python smoke_test.py`, including
+upload/live UI, manual exercise routing and rejection of unapproved candidates.
+Software tests do not establish posture correctness. Sit-up correctness remains
+unimplemented; only the original experimental push-up classifier is enabled.
+

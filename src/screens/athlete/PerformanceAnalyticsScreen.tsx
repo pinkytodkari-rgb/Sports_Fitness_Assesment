@@ -68,7 +68,7 @@ export const PerformanceAnalyticsScreen: React.FC<{ navigation: any }> = ({ navi
             data={timeframe === 'weekly' ? weeklyData : monthlyData}
             width={340}
             height={190}
-            color={colors.accent}
+            color={colors.primary}
             unit="pt"
           />
         </View>
@@ -89,7 +89,7 @@ export const PerformanceAnalyticsScreen: React.FC<{ navigation: any }> = ({ navi
         <TouchableOpacity
           onPress={() => navigation.navigate('AIFeedback')}
           style={styles.actionCard}
-          activeOpacity={0.8}
+          activeOpacity={0.85}
         >
           <View style={styles.actionInfo}>
             <Text style={styles.actionTitle}>AI Biomechanical Form Correction</Text>
@@ -105,7 +105,7 @@ export const PerformanceAnalyticsScreen: React.FC<{ navigation: any }> = ({ navi
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.background,
   },
   scrollContent: {
     padding: spacing.lg,
@@ -113,12 +113,13 @@ const styles = StyleSheet.create({
   },
   toggleRow: {
     flexDirection: 'row',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: '#FFFFFF',
     borderRadius: borderRadius.button,
     padding: 4,
     marginBottom: spacing.lg,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
+    ...shadows.soft,
   },
   toggleBtn: {
     flex: 1,
@@ -127,31 +128,31 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.sm,
   },
   activeToggle: {
-    backgroundColor: colors.primary, // #0B1F3A
+    backgroundColor: colors.primary,
   },
   toggleText: {
     color: colors.textSecondary,
     fontSize: 13,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   activeToggleText: {
     color: '#FFFFFF',
-    fontWeight: '700',
+    fontWeight: '800',
   },
   chartCard: {
     backgroundColor: '#FFFFFF',
-    borderRadius: borderRadius.card, // 18px
+    borderRadius: borderRadius.card,
     padding: spacing.lg,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     marginBottom: spacing.lg,
     alignItems: 'center',
     ...shadows.card,
   },
   chartTitle: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 16,
-    fontWeight: '700',
+    fontWeight: '800',
     marginBottom: spacing.md,
     alignSelf: 'flex-start',
   },
@@ -164,11 +165,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#EFF6FF',
+    backgroundColor: '#FFF7ED',
     padding: spacing.lg,
     borderRadius: borderRadius.card,
     borderWidth: 1,
-    borderColor: '#DBEAFE',
+    borderColor: '#FED7AA',
     ...shadows.soft,
   },
   actionInfo: {
@@ -176,9 +177,9 @@ const styles = StyleSheet.create({
     marginRight: spacing.md,
   },
   actionTitle: {
-    color: colors.primary,
+    color: colors.textPrimary,
     fontSize: 15,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   actionSub: {
     color: colors.textSecondary,
@@ -186,8 +187,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   actionLinkText: {
-    color: colors.accent,
+    color: colors.primary,
     fontSize: 13,
-    fontWeight: '700',
+    fontWeight: '800',
   },
 });

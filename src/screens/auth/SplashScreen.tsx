@@ -47,9 +47,9 @@ export const SplashScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     <View style={styles.container}>
       <Animated.View style={[styles.logoWrapper, { opacity: opacityAnim, transform: [{ scale: scaleAnim }] }]}>
         <View style={styles.iconCircle}>
-          <Ionicons name="sparkles" size={42} color="#FFFFFF" />
+          <Ionicons name="flash" size={42} color="#FFFFFF" />
         </View>
-        <Text style={styles.brandTitle}>Athlete<Text style={{ color: colors.accent }}>AI</Text></Text>
+        <Text style={styles.brandTitle}>Athlete<Text style={{ color: colors.primary }}>AI</Text></Text>
         <Text style={styles.tagline}>BIOMECHANICAL PERFORMANCE & SCOUTING</Text>
       </Animated.View>
     </View>
@@ -59,7 +59,7 @@ export const SplashScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.background,
     justifyContent: 'center',
     alignItems: 'center',
     padding: spacing.lg,
@@ -71,20 +71,20 @@ const styles = StyleSheet.create({
     width: 84,
     height: 84,
     borderRadius: 42,
-    backgroundColor: colors.primary, // #0B1F3A
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: spacing.md,
-    shadowColor: '#0B1F3A',
+    shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
+    shadowOpacity: 0.35,
+    shadowRadius: 18,
     elevation: 8,
   },
   brandTitle: {
     fontSize: 34,
     fontWeight: '800',
-    color: colors.primary,
+    color: colors.textPrimary,
     letterSpacing: -0.5,
   },
   tagline: {

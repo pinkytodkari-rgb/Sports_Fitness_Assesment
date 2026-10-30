@@ -43,7 +43,7 @@
         }
       ],
       "reason": "Supported exercise detected",
-      "processing_seconds": 8.823,
+      "processing_seconds": 5.228,
       "clips_analyzed": 1
     },
     "counting": {
@@ -54,19 +54,61 @@
       "valid_reps": null,
       "invalid_reps": null,
       "form_assessment": "Unavailable: RepNet does not assess form",
-      "processing_seconds": 28.541,
+      "processing_seconds": 19.244,
       "video_seconds": 11.64
     },
-    "form_assessment": "Unavailable: no validated form-assessment checkpoint for these exercises",
+    "counting_error": null,
+    "assessment_exercise": "Push-ups",
+    "exercise_source": "model",
+    "form_assessment": {
+      "status": "uncertain",
+      "label": "Uncertain",
+      "probabilities": {
+        "correct": 0.4244,
+        "incorrect": 0.5756
+      },
+      "observations": [
+        {
+          "seconds": 3.8,
+          "label": "Uncertain",
+          "probability_correct": 0.4175
+        },
+        {
+          "seconds": 5.04,
+          "label": "Uncertain",
+          "probability_correct": 0.4137
+        },
+        {
+          "seconds": 6.32,
+          "label": "Uncertain",
+          "probability_correct": 0.4659
+        },
+        {
+          "seconds": 7.76,
+          "label": "Uncertain",
+          "probability_correct": 0.4003
+        }
+      ],
+      "exercise": "Push-ups",
+      "model": "sakkysakky/vit-pushup-form-classifier",
+      "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+      "processor_source": "google/vit-base-patch16-224",
+      "experimental": true,
+      "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "processing_seconds": 18.577
+    },
     "valid_reps": null,
     "invalid_reps": null,
     "pose_visible_percent": null,
-    "processing_seconds": 57.164,
+    "processing_seconds": 46.307,
     "video_seconds": 11.64,
     "input": "uploaded video",
     "models": [
       "torchvision/S3D_KINETICS400_V1",
-      "RepNet"
+      "RepNet",
+      "sakkysakky/vit-pushup-form-classifier"
     ]
   }
 }

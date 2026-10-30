@@ -36,7 +36,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         onChangeText={onChangeText}
         placeholder={placeholder}
         placeholderTextColor={colors.textMuted}
-        selectionColor={colors.accent}
+        selectionColor={colors.primary}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       />
@@ -59,14 +59,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
-    borderRadius: borderRadius.input, // 12px
+    borderRadius: borderRadius.input,
     paddingHorizontal: spacing.md,
     height: 52,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
   },
   containerFocused: {
-    borderColor: colors.accent, // #2563EB Focus border blue
+    borderColor: colors.primary,
   },
   searchIcon: {
     marginRight: spacing.sm,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     padding: spacing.xs,
     marginLeft: spacing.xs,
     borderLeftWidth: 1,
-    borderLeftColor: '#E5E7EB',
+    borderLeftColor: colors.surfaceBorder,
     paddingLeft: spacing.sm,
   },
 });

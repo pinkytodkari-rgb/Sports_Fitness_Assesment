@@ -1,4 +1,13 @@
-# Implementation status — 2026-10-13
+# Implementation status
+
+## Posture update — 2026-10-15
+
+Push-up-only correct/incorrect image classification is now integrated and marked
+experimental. Upload and live-window inference have been exercised. Public labelled
+smoke test: 7 matching labels, 1 Uncertain; training overlap unknown. Other exercises
+still lack form classifiers. See [POSTURE_ASSESSMENT.md](POSTURE_ASSESSMENT.md).
+
+## Previous implementation snapshot — 2026-10-13
 
 | Component | Implementation | Validation |
 |---|---|---|

@@ -20,15 +20,14 @@ export const StatCard: React.FC<StatCardProps> = ({
   trend,
   color = colors.primary,
 }) => {
-  const isDefaultPrimary = color === colors.primary || color === '#00F2FE';
-  const displayColor = isDefaultPrimary ? colors.primary : color;
+  const displayColor = color || colors.primary;
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
         {icon && (
-          <View style={[styles.iconWrapper, { backgroundColor: '#F1F5F9' }]}>
+          <View style={[styles.iconWrapper, { backgroundColor: `${displayColor}15` }]}>
             <Ionicons name={icon} size={18} color={displayColor} />
           </View>
         )}
@@ -52,10 +51,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     minWidth: 140,
-    borderRadius: borderRadius.card, // 18px
-    padding: spacing.lg, // 24px
+    borderRadius: borderRadius.card,
+    padding: spacing.lg,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     backgroundColor: '#FFFFFF',
     ...shadows.card,
   },
@@ -68,22 +67,22 @@ const styles = StyleSheet.create({
   title: {
     color: colors.textSecondary,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
   iconWrapper: {
-    width: 32,
-    height: 32,
+    width: 34,
+    height: 34,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
   value: {
     fontSize: 26,
-    fontWeight: '700',
+    fontWeight: '800',
     marginVertical: spacing.xs,
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
   },
   subtitle: {
     color: colors.textMuted,
@@ -98,6 +97,6 @@ const styles = StyleSheet.create({
   trendText: {
     color: colors.emerald,
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 });

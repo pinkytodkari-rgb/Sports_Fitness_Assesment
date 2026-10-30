@@ -1,0 +1,515 @@
+{
+  "source": "https://www.kaggle.com/datasets/mohamadashrafsalama/pushup",
+  "training_overlap": "Unknown; this is a labelled smoke test, not held-out validation",
+  "samples": [
+    {
+      "file": "Correct sequence/Copy of push up 1.mp4",
+      "expected": "Correct",
+      "prediction": {
+        "status": "assessed",
+        "label": "Correct",
+        "probabilities": {
+          "correct": 0.9987,
+          "incorrect": 0.0013
+        },
+        "observations": [
+          {
+            "seconds": 0.0,
+            "label": "Correct",
+            "probability_correct": 0.9975
+          },
+          {
+            "seconds": 0.32,
+            "label": "Correct",
+            "probability_correct": 0.9985
+          },
+          {
+            "seconds": 0.68,
+            "label": "Correct",
+            "probability_correct": 0.9982
+          },
+          {
+            "seconds": 1.0,
+            "label": "Correct",
+            "probability_correct": 0.9994
+          },
+          {
+            "seconds": 1.36,
+            "label": "Correct",
+            "probability_correct": 0.999
+          },
+          {
+            "seconds": 1.68,
+            "label": "Correct",
+            "probability_correct": 0.9992
+          },
+          {
+            "seconds": 2.04,
+            "label": "Correct",
+            "probability_correct": 0.9989
+          },
+          {
+            "seconds": 2.4,
+            "label": "Correct",
+            "probability_correct": 0.9987
+          }
+        ],
+        "exercise": "Push-ups",
+        "model": "sakkysakky/vit-pushup-form-classifier",
+        "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+        "processor_source": "google/vit-base-patch16-224",
+        "experimental": true,
+        "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "processing_seconds": 15.114
+      }
+    },
+    {
+      "file": "Correct sequence/Copy of push up 137.mp4",
+      "expected": "Correct",
+      "prediction": {
+        "status": "assessed",
+        "label": "Correct",
+        "probabilities": {
+          "correct": 0.9996,
+          "incorrect": 0.0004
+        },
+        "observations": [
+          {
+            "seconds": 0.0,
+            "label": "Correct",
+            "probability_correct": 0.9993
+          },
+          {
+            "seconds": 0.4,
+            "label": "Correct",
+            "probability_correct": 0.9996
+          },
+          {
+            "seconds": 0.8,
+            "label": "Correct",
+            "probability_correct": 0.9996
+          },
+          {
+            "seconds": 1.2,
+            "label": "Correct",
+            "probability_correct": 0.9995
+          },
+          {
+            "seconds": 1.6,
+            "label": "Correct",
+            "probability_correct": 0.9996
+          },
+          {
+            "seconds": 2.0,
+            "label": "Correct",
+            "probability_correct": 0.9996
+          },
+          {
+            "seconds": 2.4,
+            "label": "Correct",
+            "probability_correct": 0.9996
+          },
+          {
+            "seconds": 2.8,
+            "label": "Correct",
+            "probability_correct": 0.9996
+          }
+        ],
+        "exercise": "Push-ups",
+        "model": "sakkysakky/vit-pushup-form-classifier",
+        "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+        "processor_source": "google/vit-base-patch16-224",
+        "experimental": true,
+        "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "processing_seconds": 3.993
+      }
+    },
+    {
+      "file": "Correct sequence/Copy of push up 177.mp4",
+      "expected": "Correct",
+      "prediction": {
+        "status": "assessed",
+        "label": "Correct",
+        "probabilities": {
+          "correct": 0.995,
+          "incorrect": 0.005
+        },
+        "observations": [
+          {
+            "seconds": 0.0,
+            "label": "Correct",
+            "probability_correct": 0.9949
+          },
+          {
+            "seconds": 0.8,
+            "label": "Correct",
+            "probability_correct": 0.9962
+          },
+          {
+            "seconds": 1.64,
+            "label": "Correct",
+            "probability_correct": 0.9956
+          },
+          {
+            "seconds": 2.48,
+            "label": "Correct",
+            "probability_correct": 0.9964
+          },
+          {
+            "seconds": 3.28,
+            "label": "Correct",
+            "probability_correct": 0.9959
+          },
+          {
+            "seconds": 4.12,
+            "label": "Correct",
+            "probability_correct": 0.9953
+          },
+          {
+            "seconds": 4.96,
+            "label": "Correct",
+            "probability_correct": 0.9932
+          },
+          {
+            "seconds": 5.8,
+            "label": "Correct",
+            "probability_correct": 0.9925
+          }
+        ],
+        "exercise": "Push-ups",
+        "model": "sakkysakky/vit-pushup-form-classifier",
+        "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+        "processor_source": "google/vit-base-patch16-224",
+        "experimental": true,
+        "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "processing_seconds": 3.675
+      }
+    },
+    {
+      "file": "Correct sequence/Copy of push up 85.mp4",
+      "expected": "Correct",
+      "prediction": {
+        "status": "assessed",
+        "label": "Correct",
+        "probabilities": {
+          "correct": 0.9841,
+          "incorrect": 0.0159
+        },
+        "observations": [
+          {
+            "seconds": 0.0,
+            "label": "Correct",
+            "probability_correct": 0.9687
+          },
+          {
+            "seconds": 0.32,
+            "label": "Correct",
+            "probability_correct": 0.9899
+          },
+          {
+            "seconds": 0.68,
+            "label": "Correct",
+            "probability_correct": 0.9897
+          },
+          {
+            "seconds": 1.0,
+            "label": "Correct",
+            "probability_correct": 0.9923
+          },
+          {
+            "seconds": 1.36,
+            "label": "Correct",
+            "probability_correct": 0.9843
+          },
+          {
+            "seconds": 1.68,
+            "label": "Correct",
+            "probability_correct": 0.9601
+          },
+          {
+            "seconds": 2.04,
+            "label": "Correct",
+            "probability_correct": 0.9941
+          },
+          {
+            "seconds": 2.4,
+            "label": "Correct",
+            "probability_correct": 0.994
+          }
+        ],
+        "exercise": "Push-ups",
+        "model": "sakkysakky/vit-pushup-form-classifier",
+        "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+        "processor_source": "google/vit-base-patch16-224",
+        "experimental": true,
+        "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "processing_seconds": 8.116
+      }
+    },
+    {
+      "file": "Wrong sequence/1.mp4",
+      "expected": "Incorrect",
+      "prediction": {
+        "status": "assessed",
+        "label": "Incorrect",
+        "probabilities": {
+          "correct": 0.0003,
+          "incorrect": 0.9997
+        },
+        "observations": [
+          {
+            "seconds": 0.0,
+            "label": "Incorrect",
+            "probability_correct": 0.0003
+          },
+          {
+            "seconds": 1.3680347013680347,
+            "label": "Incorrect",
+            "probability_correct": 0.0003
+          },
+          {
+            "seconds": 2.7360694027360695,
+            "label": "Incorrect",
+            "probability_correct": 0.0003
+          },
+          {
+            "seconds": 4.104104104104104,
+            "label": "Incorrect",
+            "probability_correct": 0.0003
+          },
+          {
+            "seconds": 5.505505505505505,
+            "label": "Incorrect",
+            "probability_correct": 0.0004
+          },
+          {
+            "seconds": 6.873540206873541,
+            "label": "Incorrect",
+            "probability_correct": 0.0005
+          },
+          {
+            "seconds": 8.241574908241574,
+            "label": "Incorrect",
+            "probability_correct": 0.0002
+          },
+          {
+            "seconds": 9.642976309642977,
+            "label": "Incorrect",
+            "probability_correct": 0.0003
+          }
+        ],
+        "exercise": "Push-ups",
+        "model": "sakkysakky/vit-pushup-form-classifier",
+        "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+        "processor_source": "google/vit-base-patch16-224",
+        "experimental": true,
+        "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "processing_seconds": 5.698
+      }
+    },
+    {
+      "file": "Wrong sequence/3.mp4",
+      "expected": "Incorrect",
+      "prediction": {
+        "status": "assessed",
+        "label": "Incorrect",
+        "probabilities": {
+          "correct": 0.0003,
+          "incorrect": 0.9997
+        },
+        "observations": [
+          {
+            "seconds": 0.0,
+            "label": "Incorrect",
+            "probability_correct": 0.0005
+          },
+          {
+            "seconds": 0.4671338004671338,
+            "label": "Incorrect",
+            "probability_correct": 0.0002
+          },
+          {
+            "seconds": 0.9676343009676344,
+            "label": "Incorrect",
+            "probability_correct": 0.0002
+          },
+          {
+            "seconds": 1.4681348014681348,
+            "label": "Incorrect",
+            "probability_correct": 0.0003
+          },
+          {
+            "seconds": 1.9352686019352687,
+            "label": "Incorrect",
+            "probability_correct": 0.0002
+          },
+          {
+            "seconds": 2.4357691024357693,
+            "label": "Incorrect",
+            "probability_correct": 0.0004
+          },
+          {
+            "seconds": 2.9362696029362696,
+            "label": "Incorrect",
+            "probability_correct": 0.0003
+          },
+          {
+            "seconds": 3.4367701034367704,
+            "label": "Incorrect",
+            "probability_correct": 0.0003
+          }
+        ],
+        "exercise": "Push-ups",
+        "model": "sakkysakky/vit-pushup-form-classifier",
+        "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+        "processor_source": "google/vit-base-patch16-224",
+        "experimental": true,
+        "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "processing_seconds": 6.662
+      }
+    },
+    {
+      "file": "Wrong sequence/Copy of push up 153.mp4",
+      "expected": "Incorrect",
+      "prediction": {
+        "status": "assessed",
+        "label": "Incorrect",
+        "probabilities": {
+          "correct": 0.0016,
+          "incorrect": 0.9984
+        },
+        "observations": [
+          {
+            "seconds": 0.0,
+            "label": "Incorrect",
+            "probability_correct": 0.0016
+          },
+          {
+            "seconds": 0.36,
+            "label": "Incorrect",
+            "probability_correct": 0.0016
+          },
+          {
+            "seconds": 0.72,
+            "label": "Incorrect",
+            "probability_correct": 0.0025
+          },
+          {
+            "seconds": 1.08,
+            "label": "Incorrect",
+            "probability_correct": 0.0017
+          },
+          {
+            "seconds": 1.44,
+            "label": "Incorrect",
+            "probability_correct": 0.0017
+          },
+          {
+            "seconds": 1.8,
+            "label": "Incorrect",
+            "probability_correct": 0.0016
+          },
+          {
+            "seconds": 2.16,
+            "label": "Incorrect",
+            "probability_correct": 0.0012
+          },
+          {
+            "seconds": 2.52,
+            "label": "Incorrect",
+            "probability_correct": 0.001
+          }
+        ],
+        "exercise": "Push-ups",
+        "model": "sakkysakky/vit-pushup-form-classifier",
+        "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+        "processor_source": "google/vit-base-patch16-224",
+        "experimental": true,
+        "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "processing_seconds": 11.126
+      }
+    },
+    {
+      "file": "Wrong sequence/Copy of push up 81.mp4",
+      "expected": "Incorrect",
+      "prediction": {
+        "status": "uncertain",
+        "label": "Uncertain",
+        "probabilities": {
+          "correct": 0.4235,
+          "incorrect": 0.5765
+        },
+        "observations": [
+          {
+            "seconds": 0.0,
+            "label": "Correct",
+            "probability_correct": 0.8688
+          },
+          {
+            "seconds": 0.52,
+            "label": "Correct",
+            "probability_correct": 0.8547
+          },
+          {
+            "seconds": 1.04,
+            "label": "Correct",
+            "probability_correct": 0.8804
+          },
+          {
+            "seconds": 1.56,
+            "label": "Uncertain",
+            "probability_correct": 0.3766
+          },
+          {
+            "seconds": 2.08,
+            "label": "Incorrect",
+            "probability_correct": 0.0627
+          },
+          {
+            "seconds": 2.6,
+            "label": "Incorrect",
+            "probability_correct": 0.053
+          },
+          {
+            "seconds": 3.12,
+            "label": "Incorrect",
+            "probability_correct": 0.1121
+          },
+          {
+            "seconds": 3.68,
+            "label": "Incorrect",
+            "probability_correct": 0.1795
+          }
+        ],
+        "exercise": "Push-ups",
+        "model": "sakkysakky/vit-pushup-form-classifier",
+        "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+        "processor_source": "google/vit-base-patch16-224",
+        "experimental": true,
+        "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+        "valid_reps": null,
+        "invalid_reps": null,
+        "processing_seconds": 12.329
+      }
+    }
+  ],
+  "classified": 7,
+  "uncertain": 1,
+  "matching_dataset_label": 7,
+  "mismatches": 0,
+  "both_labels_produced": true
+}

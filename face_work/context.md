@@ -46,3 +46,48 @@ These were prototype heuristics, never official SAI standards or trained form mo
 - Internet source and tests must be documented; manually verify counts independently.
 
 Previous branch URL: https://github.com/pinkytodkari-rgb/Sports_Fitness_Assesment/tree/add-face-work/face_work
+
+## 2026-10-15: correct/incorrect posture work
+
+The user clarified that the missing feature is form correctness, not exercise
+recognition. `form_assessment.py` now uses the trained ViT checkpoint
+`sakkysakky/vit-pushup-form-classifier`, revision
+`b4eb658808312c7ab4843ecf86f5cc6daeee5740`, for PUSH-UPS ONLY.
+Labels in its config are correct/incorrect. It is connected to uploaded-video
+assessment and live windows; no angle rules are restored. Confidence rejection
+can return Uncertain. Correct form predictions do not become valid-rep counts.
+
+Publisher documentation omits preprocessing details and training data identity.
+The documented base `google/vit-base-patch16-224` image processor is used and this
+assumption is exposed in output metadata. Treat the feature as experimental.
+Eight public Kaggle clips: four correct predicted Correct, three wrong predicted
+Incorrect, one wrong returned Uncertain. Training overlap is UNKNOWN: no accuracy
+claim. An unrelated Pexels clip also returned Uncertain. Preserve these failures.
+
+Squats, sit-ups, jumping jacks and lunges DO NOT yet have correct/incorrect form
+classification. The UI now explicitly lists exercise-specific feature coverage.
+Do not present MediaPipe landmarks, action recognition or RepNet as posture
+correctness. Detailed corrective advice and valid/invalid rep scoring remain
+unimplemented. Obtain appropriate trained checkpoints or labelled training data
+for missing exercises; do not silently substitute a generic/push-up classifier.
+
+Kaggle evaluation source: https://www.kaggle.com/datasets/mohamadashrafsalama/pushup
+Local clips are not redistributed (dataset CC BY-NC-SA 4.0). Results are recorded
+in references/posture-validation.json and references/posture-integration.json.
+
+## 2026-10-15: online data and multi-exercise candidates
+
+User has no dataset links: find/download public data ourselves; do not ask again.
+Added separate learned-head training/registry for all six listed exercises and
+explicit user exercise overrides in upload/live. Overrides are not auto detection.
+Downloaded sixteen QEVD coach-feedback clips, eight squats/eight jumping jacks.
+Preserved source quotes, frame spans and sessions. Weak labels, not verified
+per-frame ground truth. Six training/two held-out clips per exercise: jacks 1/2
+correct, squats 2/2. Both disabled as candidate_not_validated: participant overlap
+unknown, sources sometimes sideways, scene bias and sample size insufficient.
+Trainer never auto-enables weights; registry requires approved_experimental.
+Only experimental push-up form is enabled. All-six correctness is NOT finished.
+No sit-up correctness-video source verified. Mendeley 26-person good/bad data is
+a lead for squats/curls; download-list access returned HTTP403/browser challenge.
+See ONLINE_FORM_DATA.md and references/multi-exercise-form-candidates.json.
+Never restore angle rules or enable tiny candidates just to claim success.

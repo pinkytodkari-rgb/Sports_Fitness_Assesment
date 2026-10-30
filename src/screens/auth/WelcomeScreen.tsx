@@ -19,9 +19,9 @@ export const WelcomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
         {/* Top Brand Banner */}
         <View style={styles.brandRow}>
           <View style={styles.brandIcon}>
-            <Ionicons name="sparkles" size={20} color="#FFFFFF" />
+            <Ionicons name="flash" size={20} color="#FFFFFF" />
           </View>
-          <Text style={styles.brandTitle}>Athlete<Text style={{ color: colors.accent }}>AI</Text></Text>
+          <Text style={styles.brandTitle}>Athlete<Text style={{ color: colors.primary }}>AI</Text></Text>
         </View>
 
         {/* Hero Athlete Showcase Image Card */}
@@ -32,7 +32,7 @@ export const WelcomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
           />
           <View style={styles.heroOverlay}>
             <View style={styles.taglineChip}>
-              <Ionicons name="shield-checkmark" size={12} color="#FFFFFF" />
+              <Ionicons name="shield-checkmark" size={12} color={colors.primary} />
               <Text style={styles.taglineText}>ENTERPRISE ATHLETE PLATFORM</Text>
             </View>
             <Text style={styles.overlayTitle}>Peak Athletic Intelligence</Text>
@@ -75,7 +75,7 @@ export const WelcomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.background,
   },
   scrollContent: {
     padding: spacing.lg,
@@ -92,22 +92,25 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 18,
-    backgroundColor: colors.primary, // #0B1F3A
+    backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
+    ...shadows.glow,
   },
   brandTitle: {
     fontSize: 24,
     fontWeight: '800',
-    color: colors.primary,
+    color: colors.textPrimary,
     letterSpacing: -0.5,
   },
   heroCard: {
-    borderRadius: borderRadius.card, // 18px
+    borderRadius: borderRadius.card,
     overflow: 'hidden',
     height: 240,
     position: 'relative',
     marginBottom: spacing.lg,
+    borderWidth: 1,
+    borderColor: colors.surfaceBorder,
     ...shadows.card,
   },
   heroImage: {
@@ -120,32 +123,32 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     padding: spacing.lg,
-    backgroundColor: 'rgba(11, 31, 58, 0.75)',
+    backgroundColor: 'rgba(15, 23, 42, 0.75)',
   },
   taglineChip: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
     alignSelf: 'flex-start',
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: borderRadius.pill,
     marginBottom: 6,
   },
   taglineText: {
-    color: '#FFFFFF',
+    color: colors.primary,
     fontSize: 9,
-    fontWeight: '700',
+    fontWeight: '800',
     letterSpacing: 0.5,
   },
   overlayTitle: {
     color: '#FFFFFF',
     fontSize: 20,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   overlaySub: {
-    color: '#DBEAFE',
+    color: '#E2E8F0',
     fontSize: 12,
     marginTop: 2,
   },
@@ -153,9 +156,9 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xl,
   },
   title: {
-    color: colors.primary,
+    color: colors.textPrimary,
     fontSize: 28,
-    fontWeight: '700',
+    fontWeight: '800',
     lineHeight: 36,
   },
   subtitle: {
@@ -172,8 +175,8 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
   },
   guestText: {
-    color: colors.textSecondary,
+    color: colors.primary,
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 });

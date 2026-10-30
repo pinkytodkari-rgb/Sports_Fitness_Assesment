@@ -8,8 +8,8 @@ from live_pipeline import LivePipeline
 from pose_preview import PosePreview
 
 class CameraProcessor(VideoProcessorBase):
-    def __init__(self,backend='TimeSformer'):
-        self.engine = LivePipeline(backend)
+    def __init__(self,backend='TimeSformer',form_enabled=True,exercise_hint=None):
+        self.engine = LivePipeline(backend,form_enabled=form_enabled,exercise_hint=exercise_hint)
         self.pose = PosePreview()
         self.lock = Lock()
         self.started = time.monotonic()

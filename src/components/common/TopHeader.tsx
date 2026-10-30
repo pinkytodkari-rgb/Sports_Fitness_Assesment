@@ -12,7 +12,7 @@ interface TopHeaderProps {
 }
 
 export const TopHeader: React.FC<TopHeaderProps> = ({ navigation, showBack = false, title }) => {
-  const { user, userRole, setUserRole, notifications } = useApp();
+  const { user, userRole, setUserRole, notifications, backendConnected } = useApp();
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   const cycleRole = () => {
@@ -35,7 +35,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ navigation, showBack = fal
   const getRoleColor = (role: UserRole) => {
     switch (role) {
       case 'athlete':
-        return colors.accent;
+        return colors.primary;
       case 'coach':
         return colors.secondary;
       case 'admin':
@@ -55,7 +55,13 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ navigation, showBack = fal
         </TouchableOpacity>
       ) : (
         <View style={styles.brandWrapper}>
-          <Text style={styles.brandTitle}>Athlete<Text style={{ color: colors.accent }}>AI</Text></Text>
+          <Text style={styles.brandTitle}>Athlete<Text style={{ color: colors.primary }}>AI</Text></Text>
+          {backendConnected && (
+            <View style={styles.backendBadge}>
+              <View style={styles.greenPulse} />
+              <Text style={styles.backendBadgeText}>API LIVE</Text>
+            </View>
+          )}
         </View>
       )}
 
@@ -65,7 +71,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ navigation, showBack = fal
         {/* Quick Role Toggle Chip */}
         <TouchableOpacity
           onPress={cycleRole}
-          style={[styles.roleBadge, { borderColor: `${getRoleColor(userRole)}30` }]}
+          style={[styles.roleBadge, { borderColor: `${getRoleColor(userRole)}40` }]}
           activeOpacity={0.8}
         >
           <View style={[styles.roleDot, { backgroundColor: getRoleColor(userRole) }]} />
@@ -107,19 +113,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.md,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.backgroundSecondary,
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    borderBottomColor: colors.surfaceBorder,
   },
   brandWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 8,
   },
   brandTitle: {
     fontSize: 20,
     fontWeight: '800',
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     letterSpacing: -0.5,
+  },
+  backendBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    backgroundColor: 'rgba(16, 185, 129, 0.12)',
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+    borderRadius: borderRadius.pill,
+    borderWidth: 1,
+    borderColor: 'rgba(16, 185, 129, 0.25)',
+  },
+  greenPulse: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: colors.emerald,
+  },
+  backendBadgeText: {
+    fontSize: 8,
+    fontWeight: '800',
+    color: colors.emerald,
+    letterSpacing: 0.5,
   },
   headerTitle: {
     fontSize: 16,
@@ -139,9 +169,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingVertical: 5,
     borderRadius: borderRadius.pill,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.surfaceLight,
     borderWidth: 1,
     gap: 5,
   },
@@ -163,7 +193,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 2,
     right: 2,
-    backgroundColor: colors.rose,
+    backgroundColor: colors.primary,
     borderRadius: 8,
     minWidth: 16,
     height: 16,
@@ -181,6 +211,6 @@ const styles = StyleSheet.create({
     height: 34,
     borderRadius: 17,
     borderWidth: 1.5,
-    borderColor: colors.accent,
+    borderColor: colors.primary,
   },
 });

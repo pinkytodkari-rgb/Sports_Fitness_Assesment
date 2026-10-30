@@ -4,13 +4,17 @@ from threading import Lock, Thread
 import time
 from model_counter import count_window
 from recognition import classify_frames
+from form_assessment import assess_form, unavailable
 
 class LivePipeline:
     def __init__(self, backend='TimeSformer', sample_fps=8,
-                 counter=count_window, recognizer=classify_frames):
+                 counter=count_window, recognizer=classify_frames, assessor=None, form_enabled=True,exercise_hint=None):
         self.backend = backend
         self.sample_fps = sample_fps
         self.counter, self.recognizer = counter, recognizer
+        self.assessor = assessor or assess_form
+        self.form_enabled = form_enabled
+        self.exercise_hint = exercise_hint
         self.lock = Lock()
         self.jobs = queue.Queue(maxsize=1)
         self.frames = []
@@ -21,7 +25,7 @@ class LivePipeline:
                       'analysed_seconds':0.0,'skipped_seconds':0.0,'pending_frames':0,
                       'windows':0,'counted_windows':0,'processing_seconds':None,'result_age_seconds':None,
                       'status':'Collecting 64 frames','error':None,'recognition':None,
-                      'form_assessment':'Unavailable: no validated form model',
+                      'form_assessment':unavailable('Unknown','Waiting for exercise recognition'),
                       'last_window_end':None,'timeline':[]}
         self.worker = Thread(target=self._work,daemon=True,name='fitness-inference')
         self.worker.start()
@@ -59,11 +63,20 @@ class LivePipeline:
                 rgb = [f for f,_ in window]
                 started = time.perf_counter()
                 prediction = self.recognizer(rgb,self.backend)
-                # Unknown activities never become exercise rep claims.
-                count = self.counter(rgb) if prediction['exercise'] != 'Unknown' else None
+                exercise = self.exercise_hint or prediction['exercise']
+                posture = (self.assessor(rgb,exercise,[t for _,t in window]) if self.form_enabled
+                           else unavailable(exercise,'Form assessment disabled for this run.'))
+                counting_error = None
+                try:
+                    count = self.counter(rgb) if exercise != 'Unknown' else None
+                except Exception as error:
+                    count = None
+                    counting_error = f'Counting failed: {error}'
                 with self.lock:
-                    self.state['exercise'] = prediction['exercise']
+                    self.state['exercise'] = exercise
+                    self.state['exercise_source'] = 'user' if self.exercise_hint else 'model'
                     self.state['recognition'] = prediction
+                    self.state['form_assessment'] = posture
                     if count is not None:
                         self.state['estimated_reps'] += count['estimated_reps']
                         self.state['counted_windows'] += 1
@@ -74,8 +87,9 @@ class LivePipeline:
                     self.state['timeline'].append({'seconds':window[-1][1],
                                                   'count':self.state['estimated_reps']})
                     self.state['status'] = ('Movement model result available' if count is not None
-                                            else 'Unknown activity; count not assessed')
-                    self.state['error'] = None
+                                            else ('Posture assessed; counting failed' if counting_error
+                                                  else 'Unknown activity; count not assessed'))
+                    self.state['error'] = counting_error
             except Exception as error:
                 with self.lock:
                     self.state['error'] = str(error)

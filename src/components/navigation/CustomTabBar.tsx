@@ -35,6 +35,7 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, 
             switch (routeName) {
               case 'DashboardTab':
                 return focused ? 'grid' : 'grid-outline';
+              case 'AssessmentCenterTab':
               case 'AssessmentTab':
                 return focused ? 'fitness' : 'fitness-outline';
               case 'AnalyticsTab':
@@ -49,7 +50,7 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, 
           };
 
           const iconName = getIconName(route.name, isFocused);
-          const iconColor = isFocused ? '#FFFFFF' : '#94A3B8';
+          const iconColor = isFocused ? '#FFFFFF' : colors.textSecondary;
 
           return (
             <TouchableOpacity
@@ -66,7 +67,7 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({ state, descriptors, 
                 <Ionicons name={iconName as any} size={20} color={iconColor} />
               </View>
 
-              <Text style={[styles.label, { color: isFocused ? colors.primary : '#94A3B8' }]}>
+              <Text style={[styles.label, { color: isFocused ? colors.primary : colors.textSecondary }]}>
                 {typeof label === 'string' ? label : route.name}
               </Text>
             </TouchableOpacity>
@@ -96,13 +97,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     paddingHorizontal: 8,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     ...shadows.floating,
   },
   tabItem: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     paddingVertical: 4,
   },
   iconWrapper: {
@@ -113,11 +114,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeIconWrapper: {
-    backgroundColor: colors.primary, // #0B1F3A
+    backgroundColor: colors.primary, // #FF5500 Electric Orange
   },
   label: {
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: '700',
     marginTop: 2,
   },
 });

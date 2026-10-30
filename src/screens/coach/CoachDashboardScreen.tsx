@@ -32,7 +32,9 @@ export const CoachDashboardScreen: React.FC<{ navigation: any }> = ({ navigation
           style={styles.discoveryBanner}
           activeOpacity={0.85}
         >
-          <Ionicons name="search" size={24} color={colors.accent} />
+          <View style={styles.searchIconBox}>
+            <Ionicons name="search" size={20} color={colors.primary} />
+          </View>
           <View style={styles.bannerTextGroup}>
             <Text style={styles.bannerTitle}>Scout & Filter Athlete Talent Pool</Text>
             <Text style={styles.bannerSub}>Search 500+ verified athletic prospects across 12 sports</Text>
@@ -67,7 +69,7 @@ export const CoachDashboardScreen: React.FC<{ navigation: any }> = ({ navigation
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.background,
   },
   scrollContent: {
     padding: spacing.lg,
@@ -81,22 +83,30 @@ const styles = StyleSheet.create({
   discoveryBanner: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EFF6FF',
+    backgroundColor: '#FFF7ED',
     padding: spacing.lg,
-    borderRadius: borderRadius.card, // 18px
+    borderRadius: borderRadius.card,
     borderWidth: 1,
-    borderColor: '#DBEAFE',
+    borderColor: '#FED7AA',
     gap: spacing.md,
     marginBottom: spacing.md,
-    ...shadows.card,
+    ...shadows.soft,
+  },
+  searchIconBox: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: 'rgba(255, 85, 0, 0.15)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bannerTextGroup: {
     flex: 1,
   },
   bannerTitle: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 15,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   bannerSub: {
     color: colors.textSecondary,

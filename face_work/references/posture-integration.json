@@ -1,0 +1,292 @@
+{
+  "Correct": {
+    "recognition": {
+      "exercise": "Push-ups",
+      "models": [
+        {
+          "exercise": "Push-ups",
+          "predicted_activity": "push up",
+          "model_score": 0.9975,
+          "top_predictions": [
+            {
+              "label": "push up",
+              "score": 0.9975
+            },
+            {
+              "label": "yoga",
+              "score": 0.0011
+            },
+            {
+              "label": "exercising with an exercise ball",
+              "score": 0.0004
+            },
+            {
+              "label": "swinging legs",
+              "score": 0.0004
+            },
+            {
+              "label": "lunge",
+              "score": 0.0004
+            }
+          ],
+          "reason": "Supported exercise detected",
+          "model": "torchvision/S3D_KINETICS400_V1",
+          "method": "pretrained S3D classifier"
+        }
+      ],
+      "reason": "Supported exercise detected",
+      "processing_seconds": 7.599,
+      "clips_analyzed": 1
+    },
+    "counting": null,
+    "counting_error": "RepNet needs at least 64 sampled frames; use a longer clip.",
+    "form_assessment": {
+      "status": "assessed",
+      "label": "Correct",
+      "probabilities": {
+        "correct": 0.9985,
+        "incorrect": 0.0015
+      },
+      "observations": [
+        {
+          "seconds": 0.0,
+          "label": "Correct",
+          "probability_correct": 0.9978
+        },
+        {
+          "seconds": 0.76,
+          "label": "Correct",
+          "probability_correct": 0.9984
+        },
+        {
+          "seconds": 1.52,
+          "label": "Correct",
+          "probability_correct": 0.999
+        },
+        {
+          "seconds": 2.4,
+          "label": "Correct",
+          "probability_correct": 0.9987
+        }
+      ],
+      "exercise": "Push-ups",
+      "model": "sakkysakky/vit-pushup-form-classifier",
+      "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+      "processor_source": "google/vit-base-patch16-224",
+      "experimental": true,
+      "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "processing_seconds": 4.613
+    },
+    "valid_reps": null,
+    "invalid_reps": null,
+    "pose_visible_percent": null,
+    "processing_seconds": 12.358,
+    "video_seconds": 2.44,
+    "input": "uploaded video",
+    "models": [
+      "torchvision/S3D_KINETICS400_V1",
+      "sakkysakky/vit-pushup-form-classifier"
+    ]
+  },
+  "Incorrect": {
+    "recognition": {
+      "exercise": "Push-ups",
+      "models": [
+        {
+          "exercise": "Push-ups",
+          "predicted_activity": "push up",
+          "model_score": 1.0,
+          "top_predictions": [
+            {
+              "label": "push up",
+              "score": 1.0
+            },
+            {
+              "label": "exercising arm",
+              "score": 0.0
+            },
+            {
+              "label": "pull ups",
+              "score": 0.0
+            },
+            {
+              "label": "breakdancing",
+              "score": 0.0
+            },
+            {
+              "label": "faceplanting",
+              "score": 0.0
+            }
+          ],
+          "reason": "Supported exercise detected",
+          "model": "torchvision/S3D_KINETICS400_V1",
+          "method": "pretrained S3D classifier"
+        }
+      ],
+      "reason": "Supported exercise detected",
+      "processing_seconds": 3.714,
+      "clips_analyzed": 1
+    },
+    "counting": {
+      "estimated_reps": 3.3531746864318848,
+      "periodicity_score": 0.4384303689002991,
+      "stride": 2,
+      "method": "pretrained RepNet",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "form_assessment": "Unavailable: RepNet does not assess form",
+      "processing_seconds": 27.584,
+      "video_seconds": 9.676
+    },
+    "counting_error": null,
+    "form_assessment": {
+      "status": "assessed",
+      "label": "Incorrect",
+      "probabilities": {
+        "correct": 0.0004,
+        "incorrect": 0.9996
+      },
+      "observations": [
+        {
+          "seconds": 2.8361695028361695,
+          "label": "Incorrect",
+          "probability_correct": 0.0002
+        },
+        {
+          "seconds": 4.104104104104104,
+          "label": "Incorrect",
+          "probability_correct": 0.0004
+        },
+        {
+          "seconds": 5.372038705372039,
+          "label": "Incorrect",
+          "probability_correct": 0.0004
+        },
+        {
+          "seconds": 6.806806806806807,
+          "label": "Incorrect",
+          "probability_correct": 0.0005
+        }
+      ],
+      "exercise": "Push-ups",
+      "model": "sakkysakky/vit-pushup-form-classifier",
+      "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+      "processor_source": "google/vit-base-patch16-224",
+      "experimental": true,
+      "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "processing_seconds": 3.536
+    },
+    "valid_reps": null,
+    "invalid_reps": null,
+    "pose_visible_percent": null,
+    "processing_seconds": 35.092,
+    "video_seconds": 9.676,
+    "input": "uploaded video",
+    "models": [
+      "torchvision/S3D_KINETICS400_V1",
+      "RepNet",
+      "sakkysakky/vit-pushup-form-classifier"
+    ]
+  },
+  "live_replay": {
+    "exercise": "Push-ups",
+    "estimated_reps": 2.07533597946167,
+    "analysed_seconds": 8.004999999999999,
+    "skipped_seconds": 0.0,
+    "pending_frames": 29,
+    "windows": 1,
+    "counted_windows": 1,
+    "processing_seconds": 12.894,
+    "result_age_seconds": 3.7600000000000007,
+    "status": "Movement model result available",
+    "error": null,
+    "recognition": {
+      "exercise": "Push-ups",
+      "models": [
+        {
+          "exercise": "Push-ups",
+          "predicted_activity": "push up",
+          "model_score": 0.9991,
+          "top_predictions": [
+            {
+              "label": "push up",
+              "score": 0.9991
+            },
+            {
+              "label": "pull ups",
+              "score": 0.0003
+            },
+            {
+              "label": "headbanging",
+              "score": 0.0001
+            },
+            {
+              "label": "yoga",
+              "score": 0.0001
+            },
+            {
+              "label": "exercising arm",
+              "score": 0.0001
+            }
+          ],
+          "reason": "Supported exercise detected",
+          "model": "torchvision/S3D_KINETICS400_V1",
+          "method": "pretrained S3D classifier"
+        }
+      ],
+      "reason": "Supported exercise detected",
+      "processing_seconds": 5.083
+    },
+    "form_assessment": {
+      "status": "uncertain",
+      "label": "Uncertain",
+      "probabilities": {
+        "correct": 0.453,
+        "incorrect": 0.547
+      },
+      "observations": [
+        {
+          "seconds": 0.0,
+          "label": "Uncertain",
+          "probability_correct": 0.3124
+        },
+        {
+          "seconds": 2.64,
+          "label": "Uncertain",
+          "probability_correct": 0.6599
+        },
+        {
+          "seconds": 5.28,
+          "label": "Uncertain",
+          "probability_correct": 0.4673
+        },
+        {
+          "seconds": 7.88,
+          "label": "Uncertain",
+          "probability_correct": 0.3726
+        }
+      ],
+      "exercise": "Push-ups",
+      "model": "sakkysakky/vit-pushup-form-classifier",
+      "revision": "b4eb658808312c7ab4843ecf86f5cc6daeee5740",
+      "processor_source": "google/vit-base-patch16-224",
+      "experimental": true,
+      "reason": "Experimental image-based form prediction, not validated completed-rep scoring. The publisher omits preprocessing details; the documented base ViT processor is used.",
+      "valid_reps": null,
+      "invalid_reps": null,
+      "processing_seconds": 4.604
+    },
+    "last_window_end": 7.88,
+    "timeline": [
+      {
+        "seconds": 7.88,
+        "count": 2.07533597946167
+      }
+    ],
+    "capture_ended": false
+  }
+}

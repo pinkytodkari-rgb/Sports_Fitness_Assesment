@@ -5,8 +5,9 @@ import numpy as np
 from recognition import classify_frames
 from model_counter import count_video
 from pose_preview import PosePreview
+from form_assessment import assess_form, unavailable
 
-def analyse_video(path, backend='TimeSformer', status=None, preview=None, thorough=False):
+def analyse_video(path, backend='TimeSformer', status=None, preview=None, thorough=False, form_enabled=True,exercise_hint=None):
     started = time.perf_counter()
     cap = cv2.VideoCapture(str(path))
     fps = cap.get(cv2.CAP_PROP_FPS)
@@ -19,6 +20,7 @@ def analyse_video(path, backend='TimeSformer', status=None, preview=None, thorou
     starts = [max(0,(expected-length)//2),0,max(0,expected-length)]
     targets = [set(np.linspace(start,start+length-1,32,dtype=int)) for start in starts]
     clips = [[] for _ in starts]
+    clip_times = [[] for _ in starts]
     decoded = 0
     pose_frames = visible = 0
     pose = PosePreview() if preview else None
@@ -26,9 +28,10 @@ def analyse_video(path, backend='TimeSformer', status=None, preview=None, thorou
         while True:
             ok,frame = cap.read()
             if not ok: break
-            for target,clip in zip(targets,clips):
+            for target,clip,times in zip(targets,clips,clip_times):
                 if decoded in target:
                     clip.append(cv2.cvtColor(cv2.resize(frame,(320,round(frame.shape[0]*320/frame.shape[1]))),cv2.COLOR_BGR2RGB))
+                    times.append(decoded/fps)
             if decoded%stride == 0:
                 h,w = frame.shape[:2]
                 scale = min(1,640/w)
@@ -58,14 +61,24 @@ def analyse_video(path, backend='TimeSformer', status=None, preview=None, thorou
         recognition['exercise'] = 'Unknown'
         recognition['reason'] = 'Different exercises detected. Upload one exercise per video.'
     recognition['clips_analyzed'] = len(predictions)
+    assessment_exercise = exercise_hint or recognition['exercise']
     counting = None
-    if recognition['exercise'] != 'Unknown':
-        counting = count_video(path,status,strides=(1,2,3,4) if thorough else (1,2))
-    return {'recognition':recognition,'counting':counting,
-            'form_assessment':'Unavailable: no validated form-assessment checkpoint for these exercises',
+    counting_error = None
+    if assessment_exercise != 'Unknown':
+        try:
+            counting = count_video(path,status,strides=(1,2,3,4) if thorough else (1,2))
+        except Exception as error:
+            counting_error = str(error)
+    if status: status('Assessing exercise form with the available trained classifier…')
+    posture = (assess_form(clips[0],assessment_exercise,clip_times[0]) if form_enabled
+               else unavailable(assessment_exercise,'Form assessment disabled for this run.'))
+    return {'recognition':recognition,'counting':counting,'counting_error':counting_error,
+            'assessment_exercise':assessment_exercise,'exercise_source':'user' if exercise_hint else 'model',
+            'form_assessment':posture,
             'valid_reps':None,'invalid_reps':None,'pose_visible_percent':
             round(100*visible/pose_frames,1) if pose_frames else None,
             'processing_seconds':round(time.perf_counter()-started,3),
             'video_seconds':round(decoded/fps,3),'input':'uploaded video',
             'models':[p['model'] for p in recognition['models']]+
-                     (['RepNet'] if counting else [])+(['MediaPipe Pose Lite'] if preview else [])}
+                     (['RepNet'] if counting else [])+(['MediaPipe Pose Lite'] if preview else [])+
+                     ([posture['model']] if posture['model'] else [])}

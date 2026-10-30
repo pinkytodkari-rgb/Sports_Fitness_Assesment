@@ -30,7 +30,7 @@ export const AthleteCard: React.FC<AthleteCardProps> = ({
           <View style={styles.nameRow}>
             <Text style={styles.name}>{athlete.name}</Text>
             {athlete.verified && (
-              <Ionicons name="checkmark-circle" size={16} color={colors.accent} />
+              <Ionicons name="checkmark-circle" size={16} color={colors.primary} />
             )}
           </View>
           <Text style={styles.sportPos}>
@@ -103,19 +103,19 @@ export const AthleteCard: React.FC<AthleteCardProps> = ({
             onPress={onComparePress}
             style={[
               styles.actionBtn,
-              isCompared && { backgroundColor: '#DBEAFE', borderColor: colors.accent },
+              isCompared && { backgroundColor: '#FFF7ED', borderColor: colors.primary },
             ]}
             activeOpacity={0.7}
           >
             <Ionicons
               name="swap-horizontal-outline"
               size={16}
-              color={isCompared ? colors.accent : colors.textSecondary}
+              color={isCompared ? colors.primary : colors.textSecondary}
             />
             <Text
               style={[
                 styles.actionBtnText,
-                isCompared && { color: colors.accent },
+                isCompared && { color: colors.primary },
               ]}
             >
               {isCompared ? 'Comparing' : 'Compare'}
@@ -134,12 +134,12 @@ export const AthleteCard: React.FC<AthleteCardProps> = ({
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: borderRadius.card, // 18px
-    padding: spacing.lg, // 20-24px
+    borderRadius: borderRadius.card,
+    padding: spacing.lg,
     backgroundColor: '#FFFFFF',
     marginBottom: spacing.md,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     ...shadows.card,
   },
   header: {
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     height: 52,
     borderRadius: 26,
     borderWidth: 2,
-    borderColor: colors.accent,
+    borderColor: colors.primary,
   },
   infoGroup: {
     flex: 1,
@@ -163,9 +163,9 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   name: {
-    color: colors.primary, // #0B1F3A
+    color: colors.textPrimary,
     fontSize: 17,
-    fontWeight: '700',
+    fontWeight: '800',
   },
   sportPos: {
     color: colors.textSecondary,
@@ -180,10 +180,11 @@ const styles = StyleSheet.create({
   scoreBadge: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#0B1F3A',
+    backgroundColor: colors.primary,
     borderRadius: borderRadius.sm,
     paddingHorizontal: 12,
     paddingVertical: 6,
+    ...shadows.glow,
   },
   scoreNumber: {
     fontSize: 20,
@@ -192,20 +193,20 @@ const styles = StyleSheet.create({
   },
   scoreLabel: {
     fontSize: 8,
-    fontWeight: '700',
-    color: '#DBEAFE',
+    fontWeight: '800',
+    color: '#FFFFFF',
     letterSpacing: 0.5,
   },
   metricsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.surfaceLight,
     borderRadius: borderRadius.sm,
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md,
     marginVertical: spacing.md,
     borderWidth: 1,
-    borderColor: '#F1F5F9',
+    borderColor: colors.surfaceBorder,
   },
   metricItem: {
     alignItems: 'center',
@@ -213,18 +214,18 @@ const styles = StyleSheet.create({
   },
   metricLabel: {
     fontSize: 9,
-    fontWeight: '600',
+    fontWeight: '700',
     color: colors.textSecondary,
   },
   metricVal: {
     fontSize: 14,
-    fontWeight: '700',
-    color: colors.primary, // #0B1F3A
+    fontWeight: '800',
+    color: colors.textPrimary,
     marginTop: 2,
   },
   metricDivider: {
     width: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: colors.surfaceBorder,
   },
   footer: {
     flexDirection: 'row',
@@ -240,7 +241,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: borderRadius.sm,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.surfaceBorder,
     backgroundColor: '#FFFFFF',
   },
   actionBtnText: {
@@ -257,6 +258,6 @@ const styles = StyleSheet.create({
   viewBtnText: {
     color: colors.primary,
     fontSize: 13,
-    fontWeight: '700',
+    fontWeight: '800',
   },
 });

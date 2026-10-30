@@ -1,6 +1,25 @@
 # Athlete Fitness Assessment — pretrained models
 
-The active app has two inputs: **Video feed (upload)** and **Live camera**.
+> Full project overview, architecture, tech stack and startup guide: [../README.md](../README.md).
+> `server.py` is the FastAPI backend used by the Expo app. The Streamlit app below is the
+> model-research/validation UI.
+
+## FastAPI backend (used by the mobile/web app)
+
+```powershell
+cd face_work
+python -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+.venv\Scripts\python.exe -m uvicorn server:app --host 127.0.0.1 --port 8000 --reload
+# or: .\start-backend.ps1
+```
+
+API docs: <http://127.0.0.1:8000/docs> · health: <http://127.0.0.1:8000/api/health>.
+The pose landmarker is downloaded automatically to `models/pose_landmarker_lite.task`.
+
+## Streamlit research UI
+
+The research app has two inputs: **Video feed (upload)** and **Live camera**.
 Both use trained video classifiers (S3D, TimeSformer or VideoMAE) and RepNet. MediaPipe Pose Lite supplies preview
 landmarks. The legacy joint-angle counter and canned posture advice were removed;
 their thresholds and recovery reference are preserved in [context.md](context.md).
@@ -40,8 +59,15 @@ installation and GPU can improve large-model inference. Weights are not in Git.
 ## What the outputs mean
 
 RepNet estimates **periodic motion**, including fractional cycles. It does not
-identify valid/invalid repetitions. Form assessment, posture-error feedback and
-official SAI scoring are unavailable; no rule fallback is enabled.
+identify valid/invalid repetitions. An experimental pretrained ViT now predicts
+**Correct / Incorrect / Uncertain for push-up posture** on sampled video images
+and live windows. Enable its sidebar checkbox. Unsupported exercises display
+Unavailable. These labels are not validated completed-rep scores.
+
+Correct/incorrect posture for squats, sit-ups, jumping jacks and lunges, detailed
+posture-error feedback, valid/invalid reps and official SAI scoring remain
+unimplemented. The coverage expander lists these gaps explicitly. No angle-rule
+fallback is enabled. See [POSTURE_ASSESSMENT.md](POSTURE_ASSESSMENT.md).
 
 Normal model preprocessing, confidence rejection, label mapping, queue limits and
 the model author's postprocessing still contain configuration values. These are
@@ -76,3 +102,12 @@ Model sources: [TimeSformer](https://huggingface.co/facebook/timesformer-base-fi
 The vendor model changes its encoder loader to installed timm; attribution and
 original source revision are recorded in context/history. Verify upstream licensing
 before distributing third-party code commercially.
+# Multi-exercise form model status
+
+See [ONLINE_FORM_DATA.md](ONLINE_FORM_DATA.md) for downloaded online data,
+candidate results and training instructions. Separate head training/routing
+supports six exercise names; only the experimental push-up classifier is enabled.
+The new squat/jumping-jack candidates are disabled pending adequate independent
+evaluation. Sit-up form classification remains unavailable. No angle-rule form
+fallback was added.
+

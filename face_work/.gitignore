@@ -7,3 +7,8 @@ sample_videos/
 latency-*.log
 .publish-repo/
 screenshots/
+sandow.db
+sandow.db-journal
+*.db-journal
+*.pyc
+.env
